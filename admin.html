@@ -1,0 +1,724 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+        content="width=device-width, initial-scale=1.0">
+
+    <title>River Tech - Administração</title>
+
+    <link rel="stylesheet"
+        href="style.css">
+
+</head>
+
+<body>
+
+    <main class="admin">
+
+
+        <!-- ================================
+             LOGIN
+        ================================= -->
+
+        <section
+            id="loginArea"
+            class="admin-card">
+
+            <header class="admin-header">
+
+                <img
+                    src="img/Logo.png"
+                    alt="River Tech"
+                    class="logo-admin">
+
+                <h1>Acesso Administrativo</h1>
+
+                <p>Rádio Indoor</p>
+
+            </header>
+
+
+            <div class="login-form">
+
+                <label for="email">
+                    E-mail
+                </label>
+
+                <input
+                    type="email"
+                    id="email"
+                    placeholder="Digite seu e-mail"
+                    autocomplete="email">
+
+
+                <label for="senha">
+                    Senha
+                </label>
+
+                <input
+                    type="password"
+                    id="senha"
+                    placeholder="Digite sua senha"
+                    autocomplete="current-password">
+
+
+                <button
+                    id="botaoLogin"
+                    class="botao-adicionar">
+
+                    Entrar
+
+                </button>
+
+
+                <p
+                    id="mensagemLogin"
+                    class="mensagem-login">
+                </p>
+
+            </div>
+
+        </section>
+
+
+
+        <!-- ================================
+             PAINEL ADMINISTRATIVO
+        ================================= -->
+
+        <div
+            id="painelAdmin"
+            style="display: none;">
+
+
+            <header class="admin-header">
+
+                <img
+                    src="img/Logo.png"
+                    alt="River Tech"
+                    class="logo-admin">
+
+                <h1>Painel Administrativo</h1>
+
+                <p>Rádio Indoor</p>
+
+            </header>
+
+            <!-- ============================================
+     INDICADORES DO PAINEL
+============================================= -->
+
+<section class="dashboard-indicadores">
+
+    <div class="indicador-card">
+
+        <div class="indicador-icone">
+            🎵
+        </div>
+
+        <div>
+            <span>Músicas</span>
+            <strong id="totalMusicas">
+                0
+            </strong>
+        </div>
+
+    </div>
+
+
+    <div class="indicador-card">
+
+        <div class="indicador-icone">
+            📻
+        </div>
+
+        <div>
+            <span>Rádios</span>
+            <strong id="totalRadios">
+                0
+            </strong>
+        </div>
+
+    </div>
+
+
+    <div class="indicador-card">
+
+        <div class="indicador-icone">
+            📢
+        </div>
+
+        <div>
+            <span>Publicidades</span>
+            <strong id="totalPublicidades">
+                0
+            </strong>
+        </div>
+
+    </div>
+
+</section>
+
+
+
+            <!-- ================================
+                 MÚSICAS
+            ================================= -->
+
+            <!-- ================================
+     BIBLIOTECA CENTRAL
+================================= -->
+
+<section class="admin-card">
+
+    <h2>🎵 Biblioteca de Músicas</h2>
+
+    <p>
+        Aqui ficam todas as músicas da plataforma.
+        Você poderá distribuir cada música para
+        uma ou várias rádios.
+    </p>
+
+
+    <div id="bibliotecaPlaylist">
+
+        <p>
+            Carregando biblioteca...
+        </p>
+
+    </div>
+
+
+    <input
+        type="file"
+        id="arquivoMusica"
+        accept="audio/mp3,audio/mpeg"
+        hidden>
+
+
+    <button
+        class="botao-adicionar"
+        id="botaoAdicionar">
+
+        + Adicionar música à biblioteca
+
+    </button>
+
+
+
+</section>
+
+<!-- ============================================
+     PROGRAMAÇÃO DAS RÁDIOS
+============================================= -->
+
+<section class="admin-card">
+
+    <h2>📻 Programação das Rádios</h2>
+
+    <p>
+        Selecione um cliente para visualizar
+        e organizar as músicas da sua rádio.
+    </p>
+
+    <select id="clienteProgramacao">
+
+        <option value="">
+            Selecione um cliente
+        </option>
+
+    </select>
+
+    <div id="listaProgramacao">
+
+        <p>
+            Selecione um cliente para carregar
+            a programação.
+        </p>
+
+    </div>
+
+</section>
+
+
+<!-- ================================
+     DISTRIBUIR MÚSICA
+================================= -->
+
+<div
+    id="modalDistribuicao"
+    class="modal-distribuicao"
+    style="display: none;">
+
+    <div class="modal-conteudo">
+
+        <h2>📻 Distribuir música</h2>
+
+        <p id="musicaSelecionada">
+            Música selecionada
+        </p>
+
+        <div id="listaClientes">
+
+            <p>
+                Carregando clientes...
+            </p>
+
+        </div>
+
+        <br>
+
+        <button
+            id="botaoConfirmarDistribuicao"
+            class="botao-adicionar">
+
+            📻 Distribuir selecionados
+
+        </button>
+
+        <button
+            id="botaoFecharModal"
+            class="botao-adicionar">
+
+            Cancelar
+
+        </button>
+
+    </div>
+
+</div>
+
+            <!-- ================================
+     PUBLICIDADE
+================================= -->
+
+<section class="admin-card">
+
+    <h2>📢 Publicidade</h2>
+
+    <p>
+        Cadastre e gerencie os anúncios
+        que serão exibidos nas rádios.
+    </p>
+
+    <!-- ================================
+         GERAR PUBLICIDADE COM IA/VOZ
+    ================================= -->
+
+    <div class="gerar-publicidade">
+
+        <div id="statusServidorPublicidade"
+     style="
+        margin-bottom: 15px;
+        padding: 10px;
+        border-radius: 8px;
+        font-weight: bold;
+        background: #eee;
+     ">
+    🔴 Servidor de áudio: verificando...
+</div>
+
+        <h3>🎙️ Gerar nova publicidade</h3>
+
+        <p>
+            Digite o texto, escolha uma voz
+            e gere automaticamente o áudio.
+        </p>
+
+
+        <label for="nomePublicidade">
+            Nome da publicidade
+        </label>
+
+        <input
+            type="text"
+            id="nomePublicidade"
+            placeholder="Ex: Supermercado River">
+
+
+        <br><br>
+
+
+        <label for="vozPublicidade">
+            Escolha a voz
+        </label>
+
+        <select id="vozPublicidade">
+
+            <option value="edresson">
+                Edresson
+            </option>
+
+            <option value="faber">
+                Faber
+            </option>
+
+            <option value="cadu">
+                Cadu
+            </option>
+
+            <option value="jeff">
+                Jeff
+            </option>
+
+        </select>
+
+        <br><br>
+
+<label for="velocidadePublicidade">
+    Velocidade da voz
+</label>
+
+<select id="velocidadePublicidade">
+
+    <option value="0.75">
+        🐢 0,75x — Mais lenta
+    </option>
+
+    <option value="1" selected>
+        🎙️ 1,0x — Normal
+    </option>
+
+    <option value="1.25">
+        ⚡ 1,25x — Mais rápida
+    </option>
+
+    <option value="1.5">
+        🚀 1,5x — Bem rápida
+    </option>
+
+</select>
+
+        <br><br>
+
+
+        <label for="textoPublicidade">
+            Texto da publicidade
+        </label>
+
+        <textarea
+            id="textoPublicidade"
+            rows="6"
+            placeholder="Digite aqui o texto que será narrado..."></textarea>
+
+
+        <br><br>
+
+
+        <button
+            id="botaoGerarPublicidade"
+            class="botao-adicionar"
+            type="button">
+
+            🎙️ Gerar publicidade
+
+        </button>
+
+
+        <p
+            id="statusGerarPublicidade"
+            style="margin-top: 15px;">
+        </p>
+
+
+        <div
+            id="previaPublicidade"
+            style="display: none; margin-top: 15px;">
+
+            <p>
+                🎧 Prévia:
+            </p>
+
+            <audio
+                id="audioPublicidade"
+                controls>
+            </audio>
+
+        </div>
+
+    </div>
+
+    <br><br>
+
+    <!-- ================================
+         ADICIONAR PUBLICIDADE
+    ================================= -->
+
+    <input
+        type="file"
+        id="arquivoPublicidade"
+        accept="audio/mp3,audio/mpeg"
+        hidden>
+
+
+    <button
+        class="botao-adicionar"
+        id="botaoAdicionarPublicidade">
+
+        📢 Adicionar publicidade
+
+    </button>
+
+    <br><br>
+
+
+
+    <!-- ================================
+         LISTA DE PUBLICIDADES
+    ================================= -->
+
+    <div
+        id="listaPublicidades"
+        style="margin-top: 20px;">
+
+        <p>
+            Carregando publicidades...
+        </p>
+
+    </div>
+
+</section>
+
+<!-- ================================
+     DISTRIBUIR PUBLICIDADE
+================================= -->
+
+<div
+    id="modalDistribuicaoPublicidade"
+    class="modal-distribuicao"
+    style="display: none;">
+
+    <div class="modal-conteudo">
+
+        <h2>📢 Distribuir publicidade</h2>
+
+        <p id="publicidadeSelecionada">
+            Publicidade selecionada
+        </p>
+
+        <div id="listaClientesPublicidade">
+
+            <p>
+                Carregando clientes...
+            </p>
+
+        </div>
+
+        <br>
+
+        <button
+            id="botaoConfirmarDistribuicaoPublicidade"
+            class="botao-adicionar">
+
+            📢 Distribuir selecionados
+
+        </button>
+
+        <button
+            id="botaoFecharModalPublicidade"
+            class="botao-adicionar">
+
+            Cancelar
+
+        </button>
+
+    </div>
+
+</div>
+
+<!-- ================================
+     CLIENTES E RÁDIOS
+================================= -->
+
+<section class="admin-card">
+
+    <h2>👥 Clientes e Rádios</h2>
+
+    <p>
+        Gerencie os clientes e acompanhe
+        o conteúdo de cada rádio.
+    </p>
+
+    <!-- BOTÃO CADASTRAR CLIENTE -->
+
+    <button
+        id="botaoCadastrarCliente"
+        class="botao-adicionar"
+        type="button">
+
+        ➕ Cadastrar novo cliente
+
+    </button>
+
+    <br><br>
+
+    <!-- LISTA DE CLIENTES -->
+
+    <div id="listaClientesAdmin">
+
+        <p>
+            Carregando clientes...
+        </p>
+
+    </div>
+
+</section>
+
+<!-- ================================
+     CADASTRAR NOVO CLIENTE
+================================= -->
+
+<section
+    id="cadastroNovoCliente"
+    class="admin-card"
+    style="display: none;">
+
+    <h2>➕ Cadastrar novo cliente</h2>
+
+    <p>
+        Preencha os dados para cadastrar uma nova rádio.
+    </p>
+
+    <div>
+
+        <label for="novoClienteNome">
+            Nome do cliente
+        </label>
+
+        <input
+            type="text"
+            id="novoClienteNome"
+            placeholder="Digite o nome do cliente">
+
+    </div>
+
+    <br>
+
+    <div>
+
+        <label for="novoClienteEmail">
+            E-mail de acesso
+        </label>
+
+        <input
+            type="email"
+            id="novoClienteEmail"
+            placeholder="Digite o e-mail do cliente">
+
+    </div>
+
+    <br>
+
+    <div>
+
+        <label for="novoClienteSenha">
+            Senha de acesso
+        </label>
+
+        <input
+            type="password"
+            id="novoClienteSenha"
+            placeholder="Digite a senha">
+
+    </div>
+
+    <br>
+
+    <button
+        id="botaoSalvarNovoCliente"
+        class="botao-adicionar"
+        type="button">
+
+        💾 Cadastrar cliente
+
+    </button>
+
+    <button
+        id="botaoCancelarCadastroCliente"
+        class="botao-adicionar"
+        type="button">
+
+        ❌ Cancelar
+
+    </button>
+
+</section>
+
+<!-- ================================
+     GERENCIAMENTO DO CLIENTE
+================================= -->
+
+<section
+    id="gerenciamentoCliente"
+    class="admin-card"
+    style="display: none;">
+
+    <h2>⚙️ Gerenciar Rádio</h2>
+
+    <div id="dadosClienteGerenciamento">
+
+        <p>
+            Carregando informações...
+        </p>
+
+    </div>
+
+    <button
+        id="botaoFecharGerenciamento"
+        class="botao-adicionar">
+
+        ← Fechar gerenciamento
+
+    </button>
+
+</section>
+
+            <!-- ================================
+                 SAIR
+            ================================= -->
+
+            <button
+                id="botaoLogout"
+                class="botao-adicionar">
+
+                🚪 Sair
+
+            </button>
+
+
+            <br><br>
+
+
+            <a
+                href="index.html"
+                class="voltar">
+
+                ← Voltar para o Rádio
+
+            </a>
+
+
+        </div>
+
+    </main>
+
+
+    <!-- SUPABASE -->
+
+    <script
+        src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2">
+    </script>
+
+
+    <script src="supabase.js"></script>
+
+    <script src="admin.js"></script>
+
+
+</body>
+
+</html>

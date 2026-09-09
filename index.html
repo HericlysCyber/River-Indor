@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>River Tech - Rádio Indoor</title>
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+  <!-- ============================================
+     LOGIN DO CLIENTE
+============================================= -->
+
+<main
+    id="loginRadio"
+    class="radio">
+
+    <header class="cabecalho">
+
+        <img
+            src="img/Logo.png"
+            alt="River Tech"
+            class="logo">
+
+        <span>
+            RÁDIO INDOOR
+        </span>
+
+    </header>
+
+
+    <section class="admin-card">
+
+        <h2>
+            📻 Acesse sua Rádio
+        </h2>
+
+        <p>
+            Digite seu e-mail e senha para acessar
+            sua rádio.
+        </p>
+
+
+        <div class="login-form">
+
+            <label for="emailRadio">
+                E-mail
+            </label>
+
+            <input
+                type="email"
+                id="emailRadio"
+                placeholder="Digite seu e-mail"
+                autocomplete="email">
+
+
+            <label for="senhaRadio">
+                Senha
+            </label>
+
+            <input
+                type="password"
+                id="senhaRadio"
+                placeholder="Digite sua senha"
+                autocomplete="current-password">
+
+
+            <button
+                id="botaoLoginRadio"
+                class="botao-adicionar">
+
+                🎵 Entrar na Rádio
+
+            </button>
+
+
+            <p
+                id="mensagemLoginRadio"
+                class="mensagem-login">
+            </p>
+
+        </div>
+
+    </section>
+
+</main>
+
+
+
+<!-- ============================================
+     RÁDIO
+============================================= -->
+
+<main
+    id="radioCliente"
+    class="radio"
+    style="display: none;">
+
+
+    <header class="cabecalho">
+
+        <img
+            src="img/Logo.png"
+            alt="River Tech"
+            class="logo">
+
+        <span>
+            RÁDIO INDOOR
+        </span>
+
+    </header>
+
+
+    <section class="capa">
+
+        <img
+            src="img/capa.webp"
+            alt="Capa da música"
+            id="capaMusica">
+
+    </section>
+
+
+    <section class="informacoes">
+
+    <h2 id="nomeClienteRadio">
+        Rádio Indoor
+    </h2>
+
+    <h1 id="nomeMusica">
+        Minha música
+    </h1>
+
+    <p id="artista">
+        River Tech
+    </p>
+
+</section>
+
+
+    <div
+        class="progresso"
+        id="progresso">
+
+        <div
+            class="barra"
+            id="barra">
+        </div>
+
+    </div>
+
+
+    <div class="tempo">
+
+        <span id="tempoAtual">
+            0:00
+        </span>
+
+        <span id="duracao">
+            0:00
+        </span>
+
+    </div>
+
+
+    <div class="controles">
+
+    <button id="anterior">
+        ⏮
+    </button>
+
+    <button
+        class="play"
+        id="play">
+
+        ▶️
+
+    </button>
+
+    <button id="proxima">
+        ⏭
+    </button>
+
+    <button id="aleatorio">
+        🔀
+    </button>
+
+</div>
+
+
+    <div class="volume">
+
+        🔊
+
+        <input
+            type="range"
+            min="0"
+            max="100"
+            value="80">
+
+    </div>
+
+
+    <audio id="audio">
+    </audio>
+
+
+    <section class="publicidade">
+
+    <span>
+        📢 PUBLICIDADE
+    </span>
+
+    <h2 id="nomePublicidadeRadio">
+        Seu anúncio pode aparecer aqui
+    </h2>
+
+    <p id="statusPublicidadeRadio">
+        Aguardando publicidade
+    </p>
+
+</section>
+
+
+    <section class="playlist-container">
+
+        <h2>
+            🎵 Playlist
+        </h2>
+
+        <div id="listaMusicas">
+        </div>
+
+    </section>
+
+
+    <button
+        id="botaoSairRadio"
+        class="botao-adicionar">
+
+        🚪 Sair da Rádio
+
+    </button>
+
+
+</main>
+
+
+
+<!-- ============================================
+     SUPABASE
+============================================= -->
+
+<script
+    src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2">
+</script>
+
+<script src="supabase.js"></script>
+
+<script src="script.js"></script>
+
+</body>
+
+</html>
