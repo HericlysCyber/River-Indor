@@ -1,2265 +1,2166 @@
-* {
+/* =========================================================
+   RIVER INDOOR — STYLE.CSS
+   Identidade visual clara / suave / profissional
+   Compatível com index.html e admin.html atuais
+   ========================================================= */
+
+:root {
+    --bg: #eef3f8;
+    --bg-deep: #e7eef5;
+
+    --surface: #ffffff;
+    --surface-2: #f8fafc;
+    --surface-3: #f1f6fa;
+
+    --border: #dce6ef;
+    --border-strong: #cbd9e5;
+
+    --text: #17324d;
+    --text-soft: #405b72;
+    --muted: #71859a;
+    --muted-2: #8b9baa;
+
+    --primary: #0066cc;
+    --primary-dark: #004f9e;
+    --primary-light: #1687e8;
+    --primary-soft: #e8f3ff;
+
+    --success: #21a866;
+    --success-soft: #eaf8f1;
+
+    --danger: #dc5963;
+    --danger-soft: #fff0f1;
+
+    --warning: #c58a22;
+    --warning-soft: #fff7e6;
+
+    --radius-sm: 10px;
+    --radius: 16px;
+    --radius-lg: 22px;
+
+    --shadow: 0 12px 35px rgba(31, 67, 96, .08);
+    --shadow-lg: 0 22px 65px rgba(31, 67, 96, .12);
+
+    --transition: 180ms ease;
+}
+
+/* =========================================================
+   RESET
+   ========================================================= */
+
+*,
+*::before,
+*::after {
     box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+html {
+    scroll-behavior: smooth;
 }
 
 body {
-    margin: 0;
     min-height: 100vh;
 
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    font-family:
+        Inter,
+        ui-sans-serif,
+        system-ui,
+        -apple-system,
+        BlinkMacSystemFont,
+        "Segoe UI",
+        Arial,
+        Helvetica,
+        sans-serif;
 
-    font-family: Arial, sans-serif;
+    color: var(--text);
 
-    background: #eef4fb;
+    background:
+        radial-gradient(
+            circle at 50% -15%,
+            rgba(0, 102, 204, .08),
+            transparent 38%
+        ),
+        linear-gradient(
+            180deg,
+            #f4f8fb 0%,
+            #eef3f8 100%
+        );
+
+    -webkit-font-smoothing: antialiased;
 }
+
+button,
+input,
+select,
+textarea {
+    font: inherit;
+}
+
+button {
+    border: 0;
+}
+
+button,
+select,
+input[type="range"] {
+    cursor: pointer;
+}
+
+img {
+    max-width: 100%;
+}
+
+audio {
+    width: 100%;
+}
+
+/* =========================================================
+   PAINEL PRINCIPAL DA RÁDIO
+   ========================================================= */
 
 .radio {
-    width: 100%;
-    max-width: 430px;
-    min-height: 100vh;
+    width: min(1180px, calc(100% - 40px));
+    margin: 28px auto;
+    overflow: hidden;
 
-    padding: 25px 20px;
+    background: #ffffff;
 
-    background: white;
+    border: 1px solid var(--border);
+    border-radius: 24px;
 
-    box-shadow: 0 0 30px rgba(0, 0, 0, 0.12);
+    box-shadow: var(--shadow-lg);
 }
 
+/* =========================================================
+   CABEÇALHO
+   ========================================================= */
+
 .cabecalho {
-    text-align: center;
-    margin-bottom: 25px;
+    min-height: 82px;
+
+    display: flex;
+    align-items: center;
+    gap: 15px;
+
+    padding: 14px 28px;
+
+    background:
+        linear-gradient(
+            90deg,
+            #f5faff 0%,
+            #ffffff 65%
+        );
+
+    border-bottom: 1px solid var(--border);
 }
 
 .logo {
-    width: 85px;
-    max-width: 30%;
-    height: auto;
+    width: 52px;
+    height: 52px;
+
+    object-fit: contain;
+    flex: 0 0 auto;
 }
 
-.cabecalho span {
-    display: block;
+.marca {
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+}
 
-    margin-top: 8%;
+.marca strong {
+    color: var(--text);
 
-    font-size: 25px;
-    font-weight: bold;
+    font-size: 20px;
+    line-height: 1;
+    font-weight: 800;
     letter-spacing: 2px;
-
-    color: #1769aa;
 }
 
-.capa {
-    width: 230px;
-    height: 230px;
+.marca span {
+    color: var(--muted);
 
-    margin: 0 auto 25px;
-
-    overflow: hidden;
-
-    background: #eaf3fb;
-
-    border-radius: 20px;
-
-    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.12);
+    font-size: 9px;
+    line-height: 1;
+    font-weight: 700;
+    letter-spacing: 2.4px;
 }
 
-.capa img {
+#radioCliente > .cabecalho {
+    grid-column: 1 / -1;
+}
+
+/* =========================================================
+   STATUS AO VIVO
+   ========================================================= */
+
+.status-radio {
+    margin-left: auto;
+
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+
+    padding: 8px 12px;
+
+    color: var(--success);
+    background: var(--success-soft);
+
+    border: 1px solid #ccebdc;
+    border-radius: 999px;
+
+    font-size: 10px;
+    font-weight: 800;
+    letter-spacing: 1.5px;
+}
+
+.status-ponto,
+.tocando-ponto {
+    width: 7px;
+    height: 7px;
+
+    border-radius: 50%;
+
+    background: var(--success);
+
+    box-shadow:
+        0 0 10px rgba(33, 168, 102, .35);
+}
+
+/* =========================================================
+   PLAYER DO CLIENTE
+   ========================================================= */
+
+#radioCliente {
+    display: grid;
+
+    grid-template-columns:
+        minmax(360px, 480px)
+        minmax(0, 1fr);
+
+    column-gap: 48px;
+
+    padding-bottom: 34px;
+}
+
+/* =========================================================
+   ÁREA DA CAPA
+   ========================================================= */
+
+.area-capa {
+    grid-column: 1;
+    grid-row: 2 / span 5;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    padding: 48px 8px 48px 38px;
+}
+
+.visualizador {
+    position: relative;
+
+    width: min(390px, 100%);
+    aspect-ratio: 1;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* =========================================================
+   CAPA / LOGO DO CLIENTE
+   ========================================================= */
+
+.logo-cliente {
+    position: relative;
+    z-index: 5;
+
+    width: 228px;
+    height: 228px;
+
+    padding: 17px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    background: #ffffff;
+
+    border: 1px solid #dce8f2;
+    border-radius: 50%;
+
+    box-shadow:
+        0 18px 45px rgba(30, 70, 105, .14),
+        0 0 55px rgba(0, 102, 204, .08);
+}
+
+.logo-cliente img {
     width: 100%;
     height: 100%;
 
-    display: block;
-
-    object-fit: cover;
+    object-fit: contain;
+    border-radius: 50%;
 }
 
+/* =========================================================
+   VISUALIZADOR / ONDAS
+   ========================================================= */
+
+.ondas {
+    position: absolute;
+    inset: 0;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.onda {
+    position: absolute;
+
+    width: 250px;
+    height: 250px;
+
+    border: 1px solid rgba(0, 102, 204, .22);
+    border-radius: 50%;
+
+    opacity: .4;
+}
+
+.nucleo {
+    position: absolute;
+
+    width: 258px;
+    height: 258px;
+
+    border-radius: 50%;
+
+    border: 1px solid rgba(0, 102, 204, .12);
+
+    box-shadow:
+        0 0 45px rgba(0, 102, 204, .08);
+}
+
+#visualizadorAudio.tocando .onda-1 {
+    animation: pulsar 2.4s infinite ease-out;
+}
+
+#visualizadorAudio.tocando .onda-2 {
+    animation: pulsar 2.4s infinite ease-out .6s;
+}
+
+#visualizadorAudio.tocando .onda-3 {
+    animation: pulsar 2.4s infinite ease-out 1.2s;
+}
+
+#visualizadorAudio.tocando .onda-4 {
+    animation: pulsar 2.4s infinite ease-out 1.8s;
+}
+
+@keyframes pulsar {
+    0% {
+        transform: scale(.72);
+        opacity: .55;
+    }
+
+    70% {
+        opacity: .10;
+    }
+
+    100% {
+        transform: scale(1.58);
+        opacity: 0;
+    }
+}
+
+/* =========================================================
+   INFORMAÇÕES DA MÚSICA
+   ========================================================= */
 
 .informacoes {
-    text-align: center;
+    grid-column: 2;
+
+    padding: 58px 34px 0 0;
 }
 
-.informacoes h1 {
-    margin: 0;
+.tocando {
+    display: flex;
+    align-items: center;
+    gap: 8px;
 
-    font-size: 22px;
+    margin-bottom: 13px;
 
-    color: #123;
+    color: var(--primary);
+
+    font-size: 10px;
+    font-weight: 800;
+    letter-spacing: 2px;
 }
 
-.informacoes p {
-    margin-top: 8px;
+#nomeClienteRadio {
+    margin-bottom: 13px;
 
-    color: #777;
+    color: var(--text-soft);
+
+    font-size: 14px;
+    font-weight: 600;
 }
+
+#nomeMusica {
+    max-width: 650px;
+
+    color: var(--text);
+
+    font-size: clamp(30px, 4vw, 46px);
+    line-height: 1.05;
+    font-weight: 800;
+    letter-spacing: -.7px;
+
+    overflow-wrap: anywhere;
+}
+
+#artista {
+    margin-top: 10px;
+
+    color: var(--muted);
+
+    font-size: 17px;
+}
+
+/* =========================================================
+   PROGRESSO
+   ========================================================= */
 
 .progresso {
-    width: 100%;
+    grid-column: 2;
+
     height: 6px;
 
-    margin-top: 25px;
+    margin: 35px 34px 0 0;
 
-    background: #ddd;
-    border-radius: 10px;
+    overflow: hidden;
+
+    background: #dfe8ef;
+
+    border-radius: 999px;
+
+    cursor: pointer;
 }
 
 .barra {
     width: 0%;
     height: 100%;
 
-    background: #1769aa;
+    border-radius: inherit;
 
-    border-radius: 10px;
+    background:
+        linear-gradient(
+            90deg,
+            #0066cc,
+            #168eea
+        );
 
-    transition: width 0.1s linear;
+    transition: width 120ms linear;
 }
 
 .tempo {
+    grid-column: 2;
+
     display: flex;
     justify-content: space-between;
 
-    margin-top: 7px;
+    margin: 8px 34px 0 0;
 
-    font-size: 12px;
-    color: #777;
-}
+    color: var(--muted-2);
 
-.controles {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-
-    gap: 25px;
-
-    margin-top: 25px;
-}
-
-.controles button {
-    border: none;
-
-    width: 45px;
-    height: 45px;
-
-    border-radius: 50%;
-
-    font-size: 20px;
-
-    cursor: pointer;
-
-    background: #eaf3fb;
-}
-
-.controles .play {
-    width: 65px;
-    height: 65px;
-
-    font-size: 25px;
-
-    color: white;
-    background: #1769aa;
-}
-
-.volume {
-    display: flex;
-    align-items: center;
-
-    gap: 10px;
-
-    margin-top: 25px;
-}
-
-.volume input {
-    width: 100%;
-}
-
-.publicidade {
-    margin-top: 30px;
-
-    padding: 20px;
-
-    text-align: center;
-
-    border-radius: 15px;
-
-    background: #1769aa;
-    color: white;
-}
-
-.publicidade span {
     font-size: 11px;
-    letter-spacing: 2px;
 }
 
-.publicidade h2 {
-    margin-bottom: 0;
+/* =========================================================
+   CONTROLES
+   ========================================================= */
 
-    font-size: 18px;
-}
-/* =========================
-   PLAYLIST
-========================= */
+.controles {
+    grid-column: 2;
 
-.playlist-container {
-    margin-top: 30px;
-}
-
-.playlist-container h2 {
-    margin-bottom: 15px;
-
-    font-size: 18px;
-
-    color: #1769aa;
-}
-
-#listaMusicas {
-    display: flex;
-    flex-direction: column;
-
-    gap: 8px;
-}
-
-.musica-item {
-    display: flex;
-    align-items: center;
-
-    padding: 12px;
-
-    border-radius: 10px;
-
-    background: #f2f6fa;
-
-    cursor: pointer;
-
-    transition: 0.2s;
-}
-
-.musica-item:hover {
-    background: #e3eef8;
-}
-
-.musica-item.ativa {
-    background: #1769aa;
-    color: white;
-}
-
-.musica-item .numero {
-    width: 30px;
-
-    font-weight: bold;
-}
-
-.musica-item .titulo {
-    flex: 1;
-
-    font-size: 14px;
-}
-/* =========================
-   PAINEL ADMINISTRATIVO
-========================= */
-
-.admin {
-    width: 100%;
-    max-width: 600px;
-
-    min-height: 100vh;
-
-    margin: auto;
-
-    padding: 30px 20px;
-
-    background: #f5f8fc;
-}
-
-.admin-header {
-    text-align: center;
-
-    margin-bottom: 25px;
-}
-
-.logo-admin {
-    width: 80px;
-    height: auto;
-}
-
-.admin-header h1 {
-    margin: 12px 0 5px;
-
-    font-size: 24px;
-
-    color: #123;
-}
-
-.admin-header p {
-    margin: 0;
-
-    color: #1769aa;
-
-    font-weight: bold;
-}
-
-.admin-card {
-    background: white;
-
-    padding: 20px;
-
-    margin-bottom: 20px;
-
-    border-radius: 15px;
-
-    box-shadow:
-        0 5px 20px rgba(0, 0, 0, 0.08);
-}
-
-.admin-card h2 {
-    margin-top: 0;
-
-    color: #1769aa;
-}
-
-.admin-musica {
-    display: flex;
-
-    align-items: center;
-
-    justify-content: space-between;
-
-    padding: 12px;
-
-    margin-bottom: 8px;
-
-    background: #f1f5f9;
-
-    border-radius: 10px;
-}
-
-.admin-musica button {
-    width: 38px;
-    height: 38px;
-
-    border: none;
-
-    border-radius: 50%;
-
-    color: white;
-
-    background: #1769aa;
-
-    cursor: pointer;
-}
-
-.botao-adicionar {
-    width: 100%;
-
-    padding: 13px;
-
-    margin-top: 12px;
-
-    border: none;
-
-    border-radius: 10px;
-
-    color: white;
-
-    background: #1769aa;
-
-    font-size: 15px;
-
-    cursor: pointer;
-}
-
-.botao-adicionar:hover {
-    opacity: 0.9;
-}
-
-.voltar {
-    display: block;
-
-    text-align: center;
-
-    margin-top: 25px;
-
-    color: #1769aa;
-
-    text-decoration: none;
-
-    font-weight: bold;
-}
-/* =========================
-   BOTÃO EXCLUIR
-========================= */
-
-.admin-musica > div {
-    display: flex;
-    gap: 8px;
-}
-
-.botao-excluir {
-    width: 38px;
-    height: 38px;
-
-    border: none;
-
-    border-radius: 50%;
-
-    background: #e9eef3;
-
-    cursor: pointer;
-
-    font-size: 16px;
-}
-
-.botao-excluir:hover {
-    background: #f5d6d6;
-}
-/* BOTÃO ALEATÓRIO ATIVO */
-
-#aleatorio.ativo {
-    background-color: #0066cc;
-    color: white;
-    transform: scale(1.08);
-}
-/* ============================================
-   RÁDIO INDOOR - VISUAL PROFISSIONAL
-============================================ */
-
-/* Área geral da rádio */
-.radio {
-    width: 100%;
-    max-width: 1000px;
-    min-height: auto;
-
-    margin: 30px auto;
-    padding: 35px 45px;
-
-    background: #ffffff;
-
-    border-radius: 24px;
-
-    box-shadow:
-        0 15px 45px rgba(0, 0, 0, 0.12);
-}
-
-
-/* ============================================
-   CABEÇALHO
-============================================ */
-
-.cabecalho {
     display: flex;
     align-items: center;
     justify-content: center;
+    gap: 12px;
 
-    gap: 18px;
-
-    margin-bottom: 35px;
-}
-
-.logo {
-    width: 75px;
-    max-width: none;
-}
-
-.cabecalho span {
-    display: block;
-
-    margin-top: 0;
-
-    font-size: 28px;
-    font-weight: 800;
-
-    letter-spacing: 3px;
-
-    color: #1769aa;
-}
-
-
-/* ============================================
-   ÁREA PRINCIPAL DO PLAYER
-============================================ */
-
-.capa {
-    width: 300px;
-    height: 300px;
-
-    margin: 0 auto 30px;
-
-    border-radius: 22px;
-
-    box-shadow:
-        0 15px 35px rgba(0, 0, 0, 0.16);
-}
-
-.informacoes h2 {
-    margin: 0 0 8px;
-
-    font-size: 18px;
-
-    color: #1769aa;
-
-    font-weight: 600;
-}
-
-.informacoes h1 {
-    margin: 0;
-
-    font-size: 26px;
-
-    color: #123;
-
-    font-weight: 700;
-}
-
-.informacoes p {
-    margin: 8px 0 0;
-
-    font-size: 15px;
-
-    color: #777;
-}
-
-
-/* ============================================
-   BARRA DE PROGRESSO
-============================================ */
-
-.progresso {
-    height: 8px;
-
-    margin-top: 30px;
-
-    background: #e4ebf2;
-
-    cursor: pointer;
-}
-
-.barra {
-    background: #1769aa;
-}
-
-
-/* ============================================
-   CONTROLES
-============================================ */
-
-.controles {
-    gap: 22px;
-
-    margin-top: 28px;
+    margin: 27px 34px 0 0;
 }
 
 .controles button {
     width: 50px;
     height: 50px;
 
-    border: 1px solid #dce7f0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 
-    background: #f1f6fa;
+    color: #405b72;
+    background: #f4f7fa;
 
-    box-shadow:
-        0 5px 12px rgba(0, 0, 0, 0.06);
+    border: 1px solid #d6e1ea;
+    border-radius: 50%;
+
+    font-size: 18px;
 
     transition:
-        transform 0.2s,
-        background 0.2s;
+        transform var(--transition),
+        background var(--transition),
+        border-color var(--transition),
+        box-shadow var(--transition);
 }
 
 .controles button:hover {
-    transform: scale(1.08);
+    transform: translateY(-2px);
 
-    background: #e3eef7;
+    color: var(--primary);
+
+    background: #edf6ff;
+
+    border-color: #bcdcf5;
 }
 
 .controles .play {
     width: 72px;
     height: 72px;
 
-    font-size: 28px;
-
-    background: #1769aa;
-
-    box-shadow:
-        0 8px 20px rgba(23, 105, 170, 0.30);
-}
-
-.controles .play:hover {
-    background: #125987;
-}
-
-
-/* ============================================
-   BOTÃO ALEATÓRIO
-============================================ */
-
-#aleatorio.ativo {
-    background: #1769aa;
-
-    color: white;
-
-    transform: scale(1.08);
-
-    box-shadow:
-        0 5px 15px rgba(23, 105, 170, 0.30);
-}
-
-
-/* ============================================
-   VOLUME
-============================================ */
-
-.volume {
-    max-width: 500px;
-
-    margin: 28px auto 0;
-
-    padding: 12px 18px;
-
-    border-radius: 15px;
-
-    background: #f5f8fb;
-}
-
-
-/* ============================================
-   PUBLICIDADE
-============================================ */
-
-.publicidade {
-    position: relative;
-
-    margin-top: 35px;
-
-    padding: 24px 25px;
-
-    min-height: 115px;
-
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-
-    text-align: center;
-
-    border-radius: 18px;
+    color: #ffffff;
 
     background:
         linear-gradient(
             135deg,
-            #1769aa,
-            #0d4d80
+            #168eea,
+            #0066cc
         );
 
-    color: white;
+    border: none;
 
-    overflow: hidden;
+    font-size: 25px;
 
     box-shadow:
-        0 10px 25px rgba(23, 105, 170, 0.20);
+        0 12px 30px rgba(0, 102, 204, .22);
 }
 
+.controles .play:hover {
+    transform: scale(1.05);
 
-/* detalhe visual */
-.publicidade::before {
-    content: "📢";
+    color: #ffffff;
 
-    position: absolute;
-
-    left: 20px;
-    top: 50%;
-
-    transform: translateY(-50%);
-
-    font-size: 38px;
-
-    opacity: 0.20;
+    box-shadow:
+        0 15px 35px rgba(0, 102, 204, .28);
 }
 
-.publicidade::after {
-    content: "";
+#aleatorio.ativo {
+    color: #ffffff;
 
-    position: absolute;
+    background: #0066cc;
 
-    width: 140px;
-    height: 140px;
+    border-color: #0066cc;
 
-    right: -50px;
-    bottom: -70px;
-
-    border-radius: 50%;
-
-    background: rgba(255, 255, 255, 0.08);
+    box-shadow:
+        0 0 20px rgba(0, 102, 204, .18);
 }
 
-.publicidade span {
-    font-size: 11px;
+/* =========================================================
+   VOLUME
+   ========================================================= */
 
-    font-weight: bold;
+.volume {
+    grid-column: 2;
 
-    letter-spacing: 3px;
+    display: flex;
+    align-items: center;
+    gap: 11px;
 
-    opacity: 0.85;
+    margin: 20px 34px 0 0;
+
+    color: var(--muted);
+}
+
+.volume input {
+    flex: 1;
+
+    accent-color: var(--primary);
+}
+
+/* =========================================================
+   PUBLICIDADE
+   ========================================================= */
+
+.publicidade {
+    grid-column: 1 / -1;
+
+    min-height: 108px;
+
+    margin: 18px 34px 0;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+
+    padding: 22px 25px;
+
+    background:
+        linear-gradient(
+            135deg,
+            #eef7ff,
+            #f8fbfe
+        );
+
+    border: 1px solid #d3e7f7;
+    border-radius: 16px;
+}
+
+.publicidade-label {
+    display: block;
+
+    margin-bottom: 7px;
+
+    color: var(--primary);
+
+    font-size: 9px;
+    font-weight: 800;
+    letter-spacing: 2px;
 }
 
 .publicidade h2 {
-    margin: 10px 0 0;
+    color: var(--text);
 
-    font-size: 19px;
-
-    font-weight: 700;
+    font-size: 17px;
+    line-height: 1.25;
 }
 
+.publicidade p {
+    margin-top: 5px;
 
-/* ============================================
+    color: var(--muted);
+
+    font-size: 12px;
+}
+
+.publicidade-icone {
+    flex: 0 0 auto;
+
+    color: var(--primary);
+
+    font-size: 42px;
+    opacity: .15;
+}
+
+/* =========================================================
    PLAYLIST
-============================================ */
+   ========================================================= */
 
 .playlist-container {
-    margin-top: 35px;
+    grid-column: 1 / -1;
+
+    margin: 24px 34px 0;
+    padding: 23px;
+
+    background: #f8fafc;
+
+    border: 1px solid var(--border);
+    border-radius: 17px;
 }
 
-.playlist-container h2 {
-    margin-bottom: 18px;
+.playlist-titulo {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 15px;
+
+    margin-bottom: 17px;
+}
+
+.playlist-titulo span {
+    color: var(--primary);
+
+    font-size: 9px;
+    font-weight: 800;
+    letter-spacing: 2px;
+}
+
+.playlist-titulo h2 {
+    margin-top: 4px;
+
+    color: var(--text);
 
     font-size: 20px;
+}
 
-    color: #1769aa;
+.playlist-status {
+    color: var(--success);
+
+    font-size: 9px;
+    font-weight: 800;
+    letter-spacing: 1px;
 }
 
 #listaMusicas {
-    gap: 10px;
+    display: flex;
+    flex-direction: column;
+    gap: 7px;
 }
 
 .musica-item {
-    padding: 14px 16px;
+    min-height: 54px;
 
-    border: 1px solid #e5edf4;
+    display: flex;
+    align-items: center;
+    gap: 10px;
 
-    border-radius: 12px;
+    padding: 10px 14px;
 
-    background: #f7f9fb;
+    color: var(--text-soft);
+
+    background: #ffffff;
+
+    border: 1px solid #e1e9f0;
+    border-radius: 10px;
 
     transition:
-        transform 0.2s,
-        background 0.2s,
-        box-shadow 0.2s;
+        background var(--transition),
+        border-color var(--transition),
+        transform var(--transition);
 }
 
 .musica-item:hover {
-    background: #edf5fb;
+    transform: translateX(2px);
 
-    transform: translateX(3px);
+    background: #f2f8fd;
 
-    box-shadow:
-        0 5px 12px rgba(0, 0, 0, 0.05);
+    border-color: #cce0ef;
 }
 
 .musica-item.ativa {
-    background: #1769aa;
+    color: #174b72;
 
-    border-color: #1769aa;
+    background:
+        linear-gradient(
+            90deg,
+            #e8f4ff,
+            #f4faff
+        );
 
-    color: white;
+    border-color: #bcdcf5;
 
     box-shadow:
-        0 6px 15px rgba(23, 105, 170, 0.20);
+        0 5px 20px rgba(0, 102, 204, .08);
 }
 
 .musica-item .numero {
-    width: 35px;
+    width: 30px;
+    flex: 0 0 30px;
 
-    font-size: 14px;
-}
-
-.musica-item .titulo {
-    font-size: 15px;
-
-    font-weight: 500;
-}
-
-
-/* ============================================
-   SAIR DA RÁDIO
-============================================ */
-
-#botaoSairRadio {
-    max-width: 300px;
-
-    display: block;
-
-    margin: 30px auto 0;
-
-    background: #eef2f5;
-
-    color: #444;
-
-    border: 1px solid #d9e1e7;
-
-    transition: 0.2s;
-}
-
-#botaoSairRadio:hover {
-    background: #e5eaee;
-
-    transform: translateY(-1px);
-}
-
-
-/* ============================================
-   COMPUTADOR / TELAS GRANDES
-============================================ */
-
-@media (min-width: 769px) {
-
-    #radioCliente {
-        display: grid;
-
-        grid-template-columns:
-            1fr 1fr;
-
-        column-gap: 55px;
-
-        align-items: center;
-    }
-
-
-    #radioCliente .cabecalho {
-        grid-column: 1 / -1;
-    }
-
-
-    #radioCliente .capa {
-        grid-column: 1;
-
-        grid-row: 2 / span 5;
-
-        width: 350px;
-        height: 350px;
-    }
-
-
-    #radioCliente .informacoes,
-    #radioCliente .progresso,
-    #radioCliente .tempo,
-    #radioCliente .controles,
-    #radioCliente .volume {
-        grid-column: 2;
-    }
-
-
-    #radioCliente .publicidade,
-    #radioCliente .playlist-container,
-    #radioCliente #botaoSairRadio {
-        grid-column: 1 / -1;
-    }
-
-
-    #radioCliente .progresso {
-        width: 100%;
-    }
-
-
-    #radioCliente .controles {
-        margin-top: 25px;
-    }
-
-}
-
-
-/* ============================================
-   CELULAR
-============================================ */
-
-@media (max-width: 768px) {
-
-    body {
-        align-items: flex-start;
-    }
-
-    .radio {
-        max-width: 430px;
-
-        min-height: 100vh;
-
-        margin: 0;
-
-        padding: 25px 20px;
-
-        border-radius: 0;
-
-        box-shadow: none;
-    }
-
-    .cabecalho {
-        margin-bottom: 25px;
-    }
-
-    .cabecalho span {
-        font-size: 22px;
-    }
-
-    .capa {
-        width: 230px;
-        height: 230px;
-    }
-
-}
-
-
-/* ============================================
-   NOTEBOOK / TELAS MÉDIAS
-============================================ */
-
-@media (min-width: 769px) and (max-width: 1100px) {
-
-    .radio {
-        max-width: 900px;
-
-        padding: 30px;
-    }
-
-    #radioCliente .capa {
-        width: 300px;
-        height: 300px;
-    }
-
-}
-/* ============================================
-   PAINEL ADMINISTRATIVO - VISUAL PROFISSIONAL
-============================================ */
-
-/* ============================================
-   ÁREA GERAL
-============================================ */
-
-.admin {
-    width: 100%;
-    max-width: 1200px;
-
-    min-height: 100vh;
-
-    margin: 0 auto;
-
-    padding: 35px 40px;
-
-    background: #f4f7fb;
-}
-
-
-/* ============================================
-   CABEÇALHO ADMIN
-============================================ */
-
-.admin-header {
-    text-align: center;
-
-    margin-bottom: 30px;
-
-    padding: 25px;
-
-    background: white;
-
-    border-radius: 20px;
-
-    box-shadow:
-        0 8px 25px rgba(0, 0, 0, 0.07);
-}
-
-.logo-admin {
-    width: 75px;
-
-    height: auto;
-
-    margin-bottom: 5px;
-}
-
-.admin-header h1 {
-    margin: 8px 0 5px;
-
-    font-size: 28px;
-
-    color: #123;
+    color: var(--muted-2);
 
     font-weight: 800;
 }
 
-.admin-header p {
-    margin: 0;
-
-    color: #1769aa;
-
-    font-size: 15px;
-
-    font-weight: bold;
-
-    letter-spacing: 1px;
+.musica-item.ativa .numero {
+    color: var(--primary);
 }
 
+/* Elementos gerados pelo JS */
 
-/* ============================================
-   CARDS
-============================================ */
+.musica-item button,
+.lista-item button,
+.biblioteca-item button,
+.publicidade-item button,
+.cliente-item button,
+.programacao-item button {
+    margin-left: auto;
+}
 
-.admin-card {
-    background: white;
+/* =========================================================
+   BOTÃO SAIR
+   ========================================================= */
 
-    padding: 25px 28px;
+#botaoSairRadio {
+    grid-column: 1 / -1;
 
-    margin-bottom: 25px;
+    justify-self: center;
 
-    border-radius: 18px;
+    min-width: 170px;
 
-    border: 1px solid #e5edf4;
+    margin-top: 24px;
+
+    padding: 10px 22px;
+
+    color: #71859a;
+
+    background: transparent;
+
+    border: 1px solid #ccd9e3;
+    border-radius: 10px;
+
+    font-size: 13px;
+    font-weight: 700;
+
+    transition: var(--transition);
+}
+
+#botaoSairRadio:hover {
+    color: var(--primary);
+
+    background: #f2f7fb;
+
+    border-color: #b8cede;
+}
+
+/* =========================================================
+   LOGIN DO CLIENTE
+   ========================================================= */
+
+#loginRadio {
+    width: min(500px, calc(100% - 40px));
+
+    margin: 55px auto;
+    padding: 28px;
+
+    background: #ffffff;
+
+    border: 1px solid var(--border);
+    border-radius: 22px;
 
     box-shadow:
-        0 8px 25px rgba(0, 0, 0, 0.06);
+        0 25px 65px rgba(31, 67, 96, .12);
 }
 
-.admin-card h2 {
-    margin-top: 0;
+#loginRadio .cabecalho {
+    min-height: auto;
 
-    margin-bottom: 8px;
-
-    font-size: 21px;
-
-    color: #1769aa;
-}
-
-.admin-card > p {
-    margin-top: 0;
-
-    margin-bottom: 20px;
-
-    line-height: 1.5;
-
-    color: #687582;
-}
-
-
-/* ============================================
-   LOGIN
-============================================ */
-
-#loginArea {
-    max-width: 500px;
-
-    margin: 70px auto;
-}
-
-#loginArea .admin-header {
-    box-shadow: none;
-
-    padding: 10px 0 20px;
-}
-
-#loginArea .login-form {
-    padding-top: 5px;
-}
-
-
-/* ============================================
-   CAMPOS
-============================================ */
-
-.login-form {
     display: flex;
-
     flex-direction: column;
+    align-items: center;
+    justify-content: center;
 
-    gap: 8px;
+    padding: 5px 0 25px;
+
+    background: transparent;
+
+    border: 0;
 }
 
-.login-form label {
-    margin-top: 8px;
-
-    color: #344454;
-
-    font-size: 14px;
-
-    font-weight: bold;
+#loginRadio .logo {
+    width: 82px;
+    height: 82px;
 }
 
-.login-form input,
-.admin-card input[type="text"],
-.admin-card input[type="email"],
-.admin-card input[type="password"],
-.admin-card select {
+#loginRadio .marca {
+    align-items: center;
+    gap: 5px;
+}
+
+#loginRadio .marca strong {
+    color: var(--text);
+    font-size: 23px;
+}
+
+#loginRadio .marca span {
+    color: var(--muted);
+    font-size: 9px;
+}
+
+#loginRadio .admin-card {
     width: 100%;
 
-    padding: 13px 15px;
+    margin: 0;
+    padding: 26px;
 
-    border: 1px solid #d9e3ec;
+    color: var(--text);
 
+    background: #ffffff;
+
+    border: 1px solid #e1e8ef;
+    border-radius: 17px;
+
+    box-shadow: 0 10px 30px rgba(31, 67, 96, .06);
+}
+
+.login-titulo {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+
+    margin-bottom: 24px;
+}
+
+.login-icone {
+    width: 10px;
+    height: 10px;
+
+    flex: 0 0 10px;
+
+    margin-top: 8px;
+
+    background: var(--success);
+
+    border-radius: 50%;
+
+    box-shadow:
+        0 0 10px rgba(33, 168, 102, .35);
+
+    color: transparent;
+    font-size: 0;
+}
+
+#loginRadio .login-titulo h2 {
+    margin: 0 0 5px;
+
+    color: var(--text);
+
+    font-size: 23px;
+    line-height: 1.2;
+}
+
+#loginRadio .login-titulo p {
+    margin: 0;
+
+    color: var(--muted);
+
+    font-size: 14px;
+    line-height: 1.45;
+}
+
+#loginRadio .login-form,
+.login-form {
+    display: flex;
+    flex-direction: column;
+
+    width: 100%;
+}
+
+#loginRadio .login-form label {
+    display: block;
+
+    margin: 0 0 7px;
+
+    color: var(--text-soft);
+
+    font-size: 13px;
+    font-weight: 700;
+}
+
+#loginRadio .login-form input {
+    width: 100%;
+    height: 50px;
+
+    margin: 0 0 17px;
+    padding: 0 15px;
+
+    color: #263f55;
+
+    background: #f8fafc;
+
+    border: 1px solid #d5dfe8;
     border-radius: 10px;
 
     outline: none;
 
-    background: #f9fbfd;
-
     font-size: 15px;
 
-    transition: 0.2s;
+    transition:
+        border-color var(--transition),
+        box-shadow var(--transition),
+        background var(--transition);
 }
 
-.login-form input:focus,
-.admin-card input:focus,
-.admin-card select:focus {
-    border-color: #1769aa;
+#loginRadio .login-form input::placeholder {
+    color: #9aa8b5;
+}
 
-    background: white;
+#loginRadio .login-form input:focus {
+    background: #ffffff;
+
+    border-color: var(--primary);
 
     box-shadow:
-        0 0 0 3px rgba(23, 105, 170, 0.10);
+        0 0 0 3px rgba(0, 102, 204, .10);
 }
 
-
-/* ============================================
-   BOTÕES
-============================================ */
-
-.botao-adicionar {
+#loginRadio #botaoLoginRadio {
     width: 100%;
+    height: 51px;
 
-    min-height: 46px;
+    margin-top: 2px;
 
-    padding: 12px 18px;
+    color: #ffffff;
 
-    margin-top: 12px;
-
-    border: none;
+    background:
+        linear-gradient(
+            135deg,
+            #168eea,
+            #0066cc
+        );
 
     border-radius: 10px;
 
-    background: #1769aa;
-
-    color: white;
-
     font-size: 15px;
+    font-weight: 800;
 
-    font-weight: bold;
+    box-shadow:
+        0 10px 25px rgba(0, 102, 204, .18);
+
+    transition:
+        transform var(--transition),
+        box-shadow var(--transition);
+}
+
+#loginRadio #botaoLoginRadio:hover {
+    transform: translateY(-2px);
+
+    box-shadow:
+        0 14px 30px rgba(0, 102, 204, .25);
+}
+
+#loginRadio .mensagem-login {
+    min-height: 20px;
+
+    margin-top: 13px;
+
+    text-align: center;
+
+    color: var(--muted);
+
+    font-size: 13px;
+}
+
+/* =========================================================
+   ADMIN — ÁREA PRINCIPAL
+   ========================================================= */
+
+.admin {
+    width: min(1240px, calc(100% - 48px));
+
+    margin: 28px auto 60px;
+
+    color: var(--text);
+}
+
+.admin-header {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    text-align: center;
+
+    padding: 18px 20px 30px;
+}
+
+.logo-admin {
+    width: 76px !important;
+    height: 76px !important;
+
+    max-width: 76px !important;
+    max-height: 76px !important;
+
+    object-fit: contain;
+
+    display: block;
+
+    margin: 0 auto 13px;
+
+    filter:
+        drop-shadow(
+            0 8px 18px rgba(0, 102, 204, .12)
+        );
+}
+
+.admin-header h1 {
+    margin: 0;
+
+    color: var(--text);
+
+    font-size: 30px;
+    line-height: 1.15;
+    font-weight: 800;
+    letter-spacing: -.3px;
+}
+
+.admin-header p {
+    margin-top: 6px;
+
+    color: var(--muted);
+
+    font-size: 12px;
+    letter-spacing: 1.4px;
+}
+
+/* =========================================================
+   LOGIN ADMIN
+   ========================================================= */
+
+#loginArea {
+    width: min(470px, 100%);
+
+    margin: 55px auto;
+
+    padding: 30px;
+
+    background: #ffffff;
+
+    border: 1px solid var(--border);
+    border-radius: 20px;
+
+    box-shadow: var(--shadow-lg);
+}
+
+#loginArea .admin-header {
+    padding: 2px 0 23px;
+}
+
+#loginArea .logo-admin {
+    width: 86px !important;
+    height: 86px !important;
+
+    max-width: 86px !important;
+    max-height: 86px !important;
+}
+
+#loginArea .admin-header h1 {
+    color: var(--text);
+    font-size: 24px;
+}
+
+#loginArea .login-form label {
+    color: var(--text-soft);
+}
+
+#loginArea .login-form input {
+    width: 100%;
+    height: 50px;
+
+    margin: 0 0 17px;
+    padding: 0 14px;
+
+    color: #263f55;
+
+    background: #f8fafc;
+
+    border: 1px solid #d5dfe8;
+    border-radius: 10px;
+
+    outline: none;
+}
+
+#loginArea .login-form input::placeholder {
+    color: #9aa8b5;
+}
+
+#loginArea .login-form input:focus {
+    border-color: var(--primary);
+
+    box-shadow:
+        0 0 0 3px rgba(0, 102, 204, .10);
+}
+
+/* =========================================================
+   CARDS ADMIN
+   ========================================================= */
+
+.admin-card {
+    width: 100%;
+
+    margin: 0 0 20px;
+    padding: 26px;
+
+    color: var(--text);
+
+    background: #ffffff;
+
+    border: 1px solid var(--border);
+    border-radius: 16px;
+
+    box-shadow:
+        0 8px 25px rgba(31, 67, 96, .055);
+}
+
+.admin-card h2 {
+    margin: 0 0 9px;
+
+    color: var(--text);
+
+    font-size: 20px;
+    line-height: 1.25;
+    font-weight: 800;
+}
+
+.admin-card h3 {
+    margin: 20px 0 8px;
+
+    color: #31516d;
+
+    font-size: 16px;
+}
+
+.admin-card > p {
+    margin-bottom: 20px;
+
+    color: var(--muted);
+
+    line-height: 1.6;
+    font-size: 13px;
+}
+
+.admin-card label {
+    display: block;
+
+    margin: 0 0 7px;
+
+    color: var(--text-soft);
+
+    font-size: 13px;
+    font-weight: 700;
+}
+
+/* =========================================================
+   CAMPOS ADMIN
+   ========================================================= */
+
+.admin-card input,
+.admin-card select,
+.admin-card textarea {
+    width: 100%;
+    max-width: 100%;
+
+    color: #263f55;
+
+    background: #f8fafc;
+
+    border: 1px solid #d5e0e9;
+    border-radius: 10px;
+
+    outline: none;
+
+    transition:
+        border-color var(--transition),
+        box-shadow var(--transition),
+        background var(--transition);
+}
+
+.admin-card input,
+.admin-card select {
+    min-height: 45px;
+    padding: 10px 13px;
+}
+
+.admin-card textarea {
+    min-height: 130px;
+
+    padding: 13px;
+
+    resize: vertical;
+
+    line-height: 1.55;
+}
+
+.admin-card input::placeholder,
+.admin-card textarea::placeholder {
+    color: #9aa9b7;
+}
+
+.admin-card input:focus,
+.admin-card select:focus,
+.admin-card textarea:focus {
+    background: #ffffff;
+
+    border-color: var(--primary);
+
+    box-shadow:
+        0 0 0 3px rgba(0, 102, 204, .09);
+}
+
+.admin-card select {
+    appearance: auto;
+}
+
+/* =========================================================
+   BOTÕES
+   ========================================================= */
+
+.botao-adicionar {
+    min-height: 44px;
+
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    padding: 10px 18px;
+
+    color: #ffffff;
+
+    background:
+        linear-gradient(
+            135deg,
+            #168eea,
+            #0066cc
+        );
+
+    border: 1px solid rgba(0, 102, 204, .45);
+    border-radius: 10px;
+
+    font-size: 13px;
+    font-weight: 800;
 
     cursor: pointer;
 
+    box-shadow:
+        0 8px 20px rgba(0, 102, 204, .15);
+
     transition:
-        transform 0.2s,
-        box-shadow 0.2s,
-        background 0.2s;
+        transform var(--transition),
+        box-shadow var(--transition),
+        filter var(--transition);
 }
 
 .botao-adicionar:hover {
-    background: #125987;
-
     transform: translateY(-1px);
 
+    filter: brightness(1.04);
+
     box-shadow:
-        0 6px 15px rgba(23, 105, 170, 0.20);
+        0 11px 25px rgba(0, 102, 204, .21);
+}
+
+.botao-adicionar:active {
+    transform: translateY(0);
 }
 
 .botao-adicionar:disabled {
-    opacity: 0.6;
+    opacity: .55;
 
     cursor: not-allowed;
 
     transform: none;
+
+    box-shadow: none;
 }
 
-
-/* ============================================
-   BIBLIOTECA CENTRAL
-============================================ */
-
-#bibliotecaPlaylist {
-    display: flex;
-
-    flex-direction: column;
-
-    gap: 10px;
-
-    margin-top: 20px;
+.admin-card .botao-adicionar + .botao-adicionar,
+.modal-conteudo .botao-adicionar + .botao-adicionar {
+    margin-left: 8px;
 }
 
+/* =========================================================
+   DASHBOARD
+   ========================================================= */
 
-/* ============================================
-   MÚSICAS DO ADMIN
-============================================ */
+.dashboard-indicadores {
+    display: grid;
 
-.admin-musica {
-    display: flex;
+    grid-template-columns:
+        repeat(3, minmax(0, 1fr));
 
-    align-items: center;
-
-    justify-content: space-between;
-
-    gap: 15px;
-
-    padding: 14px 16px;
-
-    margin-bottom: 0;
-
-    background: #f7f9fc;
-
-    border: 1px solid #e3ebf2;
-
-    border-radius: 12px;
-
-    transition: 0.2s;
-}
-
-.admin-musica:hover {
-    background: #eef5fa;
-
-    transform: translateX(2px);
-}
-
-.admin-musica > div {
-    display: flex;
-
-    align-items: center;
-
-    gap: 8px;
-}
-
-.admin-musica button {
-    width: 40px;
-    height: 40px;
-
-    flex-shrink: 0;
-
-    border: none;
-
-    border-radius: 10px;
-
-    color: white;
-
-    background: #1769aa;
-
-    cursor: pointer;
-
-    transition: 0.2s;
-}
-
-.admin-musica button:hover {
-    transform: scale(1.05);
-}
-
-
-/* ============================================
-   BOTÃO EXCLUIR
-============================================ */
-
-.botao-excluir {
-    width: 40px;
-
-    height: 40px;
-
-    border: none;
-
-    border-radius: 10px;
-
-    background: #f0f3f6;
-
-    cursor: pointer;
-
-    font-size: 16px;
-
-    transition: 0.2s;
-}
-
-.botao-excluir:hover {
-    background: #f8dddd;
-
-    transform: scale(1.05);
-}
-
-
-/* ============================================
-   PROGRAMAÇÃO
-============================================ */
-
-#clienteProgramacao {
-    margin-top: 10px;
+    gap: 16px;
 
     margin-bottom: 20px;
-
-    cursor: pointer;
 }
 
-#listaProgramacao {
-    display: flex;
-
-    flex-direction: column;
-
-    gap: 8px;
-}
-
-
-/* ============================================
-   PUBLICIDADE
-============================================ */
-
-#listaPublicidades {
-    display: flex;
-
-    flex-direction: column;
-
-    gap: 10px;
-
-    margin-top: 20px !important;
-}
-
-#listaPublicidades > div {
-    border-radius: 12px;
-}
-
-
-/* ============================================
-   MODAIS
-============================================ */
-
-.modal-distribuicao {
-    position: fixed;
-
-    inset: 0;
-
-    z-index: 9999;
+.indicador-card {
+    min-width: 0;
 
     display: flex;
-
     align-items: center;
-
-    justify-content: center;
+    gap: 14px;
 
     padding: 20px;
 
-    background: rgba(10, 30, 50, 0.60);
+    background: #ffffff;
 
-    backdrop-filter: blur(4px);
-}
-
-.modal-conteudo {
-    width: 100%;
-
-    max-width: 500px;
-
-    max-height: 85vh;
-
-    overflow-y: auto;
-
-    padding: 28px;
-
-    background: white;
-
-    border-radius: 20px;
+    border: 1px solid var(--border);
+    border-radius: 15px;
 
     box-shadow:
-        0 20px 60px rgba(0, 0, 0, 0.25);
+        0 8px 22px rgba(31, 67, 96, .055);
 }
 
-.modal-conteudo h2 {
-    margin-top: 0;
+.indicador-icone {
+    width: 46px;
+    height: 46px;
 
-    color: #1769aa;
+    flex: 0 0 46px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    background: var(--primary-soft);
+
+    border: 1px solid #d7eaff;
+    border-radius: 12px;
+
+    font-size: 20px;
 }
 
-.modal-conteudo p {
-    color: #667684;
+.indicador-card span {
+    display: block;
+
+    color: var(--muted);
+
+    font-size: 11px;
 }
 
+.indicador-card strong {
+    display: block;
 
-/* ============================================
-   CLIENTES DO MODAL
-============================================ */
+    margin-top: 2px;
 
+    color: var(--text);
+
+    font-size: 24px;
+    line-height: 1.1;
+}
+
+/* =========================================================
+   ÁREAS DINÂMICAS
+   ========================================================= */
+
+#bibliotecaPlaylist,
+#listaProgramacao,
+#listaPublicidades,
+#listaClientesAdmin,
+#dadosClienteGerenciamento,
 #listaClientes,
 #listaClientesPublicidade {
     margin-top: 15px;
 }
 
-.cliente-selecionado {
-    width: 18px;
+#bibliotecaPlaylist > p,
+#listaProgramacao > p,
+#listaPublicidades > p,
+#listaClientesAdmin > p,
+#dadosClienteGerenciamento > p,
+#listaClientes > p,
+#listaClientesPublicidade > p {
+    padding: 14px;
 
-    height: 18px;
+    color: var(--muted);
 
-    margin-right: 8px;
+    background: #f8fafc;
 
-    accent-color: #1769aa;
+    border: 1px dashed #d4e0e8;
+    border-radius: 10px;
+
+    font-size: 13px;
 }
 
+/* =========================================================
+   LISTAS DINÂMICAS
+   ========================================================= */
 
-/* ============================================
-   BOTÃO VOLTAR
-============================================ */
+.lista-item,
+.biblioteca-item,
+.cliente-item,
+.publicidade-item,
+.programacao-item {
+    min-height: 55px;
+
+    display: flex;
+    align-items: center;
+    gap: 12px;
+
+    margin-bottom: 8px;
+
+    padding: 11px 13px;
+
+    color: var(--text-soft);
+
+    background: #f8fafc;
+
+    border: 1px solid #e1e9f0;
+    border-radius: 10px;
+
+    transition:
+        background var(--transition),
+        border-color var(--transition),
+        transform var(--transition);
+}
+
+.lista-item:hover,
+.biblioteca-item:hover,
+.cliente-item:hover,
+.publicidade-item:hover,
+.programacao-item:hover {
+    background: #f1f7fc;
+
+    border-color: #c9dfef;
+}
+
+.lista-item:last-child,
+.biblioteca-item:last-child,
+.cliente-item:last-child,
+.publicidade-item:last-child,
+.programacao-item:last-child {
+    margin-bottom: 0;
+}
+
+.lista-item strong,
+.biblioteca-item strong,
+.cliente-item strong,
+.publicidade-item strong,
+.programacao-item strong {
+    color: #25445e;
+
+    font-size: 14px;
+}
+
+.lista-item span,
+.biblioteca-item span,
+.cliente-item span,
+.publicidade-item span,
+.programacao-item span {
+    color: var(--muted);
+
+    font-size: 12px;
+}
+
+/* =========================================================
+   GERAÇÃO DE PUBLICIDADE
+   ========================================================= */
+
+.gerar-publicidade {
+    margin-top: 18px;
+
+    padding: 20px;
+
+    background: #f7fafc;
+
+    border: 1px solid #dfe8ef;
+    border-radius: 15px;
+}
+
+.gerar-publicidade h3 {
+    margin-top: 0;
+}
+
+#statusServidorPublicidade {
+    color: #536c81;
+
+    background: #eef4f8 !important;
+
+    border: 1px solid #dce6ee;
+}
+
+#statusGerarPublicidade {
+    color: var(--muted);
+}
+
+/* =========================================================
+   ÁUDIO / PRÉVIA
+   ========================================================= */
+
+#previaPublicidade {
+    padding: 14px;
+
+    background: #f7fafc;
+
+    border: 1px solid #dfe8ef;
+    border-radius: 12px;
+}
+
+#previaPublicidade p {
+    margin-bottom: 10px;
+
+    color: var(--text-soft);
+
+    font-size: 13px;
+}
+
+#audioPublicidade {
+    height: 42px;
+}
+
+/* =========================================================
+   MODAIS
+   ========================================================= */
+
+.modal-distribuicao {
+    position: fixed;
+    inset: 0;
+    z-index: 1000;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    padding: 20px;
+
+    background: rgba(23, 50, 77, .28);
+
+    backdrop-filter: blur(7px);
+}
+
+.modal-conteudo {
+    width: min(560px, 100%);
+    max-height: 90vh;
+
+    overflow-y: auto;
+
+    padding: 27px;
+
+    background: #ffffff;
+
+    border: 1px solid var(--border);
+    border-radius: 18px;
+
+    box-shadow:
+        0 30px 80px rgba(20, 50, 80, .20);
+}
+
+.modal-conteudo h2 {
+    margin-bottom: 10px;
+
+    color: var(--text);
+
+    font-size: 21px;
+}
+
+.modal-conteudo > p {
+    margin-bottom: 17px;
+
+    color: var(--muted);
+
+    line-height: 1.5;
+}
+
+/* =========================================================
+   CHECKBOXES
+   ========================================================= */
+
+input[type="checkbox"],
+input[type="radio"] {
+    accent-color: var(--primary);
+}
+
+#listaClientes label,
+#listaClientesPublicidade label {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+
+    margin-bottom: 7px;
+
+    padding: 11px 12px;
+
+    color: var(--text-soft);
+
+    background: #f8fafc;
+
+    border: 1px solid #dfe7ee;
+    border-radius: 9px;
+
+    cursor: pointer;
+}
+
+#listaClientes label:hover,
+#listaClientesPublicidade label:hover {
+    background: #eef7ff;
+
+    border-color: #c8e2f7;
+}
+
+/* =========================================================
+   LINK VOLTAR
+   ========================================================= */
 
 .voltar {
     display: block;
 
     width: fit-content;
 
-    margin: 25px auto 0;
+    margin: 22px auto 5px;
 
-    padding: 10px 18px;
+    color: var(--primary);
 
-    color: #1769aa;
+    font-size: 13px;
+    font-weight: 600;
 
     text-decoration: none;
 
-    font-weight: bold;
-
-    border-radius: 10px;
-
-    transition: 0.2s;
+    transition: color var(--transition);
 }
 
 .voltar:hover {
-    background: #eaf3fb;
+    color: var(--primary-dark);
 }
 
+/* =========================================================
+   FORMULÁRIOS ADMIN
+   ========================================================= */
 
-/* ============================================
-   BOTÃO SAIR ADMIN
-============================================ */
-
-#botaoLogout {
-    max-width: 350px;
-
-    display: block;
-
-    margin: 25px auto 0;
-
-    background: #eef2f5;
-
-    color: #3e4a54;
-
-    border: 1px solid #d9e2e9;
+#cadastroNovoCliente > div {
+    margin-bottom: 16px;
 }
 
-#botaoLogout:hover {
-    background: #e3e8ec;
+#cadastroNovoCliente > div:last-of-type {
+    margin-bottom: 18px;
+}
+
+#cadastroNovoCliente br,
+.gerar-publicidade br {
+    display: none;
+}
+
+/* =========================================================
+   BOTÕES SECUNDÁRIOS
+   ========================================================= */
+
+#botaoCancelarCadastroCliente,
+#botaoFecharGerenciamento,
+#botaoFecharModal,
+#botaoFecharModalPublicidade {
+    color: #526b80;
+
+    background: #eef3f7;
+
+    border: 1px solid #d5e0e8;
 
     box-shadow: none;
 }
 
+#botaoCancelarCadastroCliente:hover,
+#botaoFecharGerenciamento:hover,
+#botaoFecharModal:hover,
+#botaoFecharModalPublicidade:hover {
+    color: #29465e;
 
-/* ============================================
-   COMPUTADOR
-============================================ */
+    background: #e3ebf1;
 
-@media (min-width: 900px) {
-
-    #painelAdmin {
-        display: grid;
-
-        grid-template-columns:
-            repeat(2, minmax(0, 1fr));
-
-        gap: 25px;
-    }
-
-
-    #painelAdmin > .admin-header {
-        grid-column: 1 / -1;
-
-        margin-bottom: 0;
-    }
-
-
-    #painelAdmin > .admin-card {
-        margin-bottom: 0;
-    }
-
-
-    #painelAdmin > .admin-card:first-of-type {
-        grid-column: 1 / -1;
-    }
-
-
-    #painelAdmin > .modal-distribuicao {
-        grid-column: 1 / -1;
-    }
-
-
-    #painelAdmin > #botaoLogout,
-    #painelAdmin > .voltar {
-        grid-column: 1 / -1;
-    }
-
+    border-color: #c7d5df;
 }
 
+/* =========================================================
+   ACESSIBILIDADE
+   ========================================================= */
 
-/* ============================================
-   TELAS MÉDIAS
-============================================ */
-
-@media (min-width: 769px) and (max-width: 899px) {
-
-    .admin {
-        padding: 25px;
-    }
-
+button:focus-visible,
+input:focus-visible,
+select:focus-visible,
+textarea:focus-visible,
+a:focus-visible {
+    outline: 2px solid #168eea;
+    outline-offset: 3px;
 }
 
+/* =========================================================
+   SCROLLBARS
+   ========================================================= */
 
-/* ============================================
-   CELULAR
-============================================ */
+* {
+    scrollbar-width: thin;
 
-@media (max-width: 768px) {
+    scrollbar-color:
+        #b7c9d8
+        transparent;
+}
 
-    .admin {
-        padding: 20px 15px;
+*::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+}
 
-        background: #f4f7fb;
+*::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+*::-webkit-scrollbar-thumb {
+    background: #b7c9d8;
+
+    border-radius: 999px;
+}
+
+*::-webkit-scrollbar-thumb:hover {
+    background: #91aabc;
+}
+
+/* =========================================================
+   RESPONSIVO — TABLET
+   ========================================================= */
+
+@media (max-width: 900px) {
+
+    .radio {
+        width: min(760px, calc(100% - 28px));
     }
 
+    #radioCliente {
+        grid-template-columns: 1fr;
+    }
+
+    #radioCliente > .cabecalho {
+        grid-column: 1;
+    }
+
+    .area-capa {
+        grid-column: 1;
+        grid-row: auto;
+
+        padding: 38px 25px 18px;
+    }
+
+    .informacoes,
+    .progresso,
+    .tempo,
+    .controles,
+    .volume {
+        grid-column: 1;
+    }
+
+    .informacoes {
+        padding: 22px 25px 0;
+
+        text-align: center;
+    }
+
+    .tocando {
+        justify-content: center;
+    }
+
+    #nomeMusica {
+        max-width: 100%;
+    }
+
+    .progresso {
+        margin: 28px 25px 0;
+    }
+
+    .tempo {
+        margin: 8px 25px 0;
+    }
+
+    .controles {
+        margin: 25px 25px 0;
+    }
+
+    .volume {
+        margin: 19px 25px 0;
+    }
+
+    .publicidade,
+    .playlist-container {
+        grid-column: 1;
+    }
+
+    .publicidade {
+        margin: 20px 25px 0;
+    }
+
+    .playlist-container {
+        margin: 22px 25px 0;
+    }
+}
+
+/* =========================================================
+   RESPONSIVO — CELULAR
+   ========================================================= */
+
+@media (max-width: 700px) {
+
+    body {
+        background: #eef3f8;
+    }
+
+    .radio {
+        width: 100%;
+        min-height: 100vh;
+
+        margin: 0;
+
+        border: 0;
+        border-radius: 0;
+
+        box-shadow: none;
+    }
+
+    .cabecalho {
+        min-height: 74px;
+
+        padding: 12px 17px;
+    }
+
+    .logo {
+        width: 47px;
+        height: 47px;
+    }
+
+    .marca strong {
+        font-size: 17px;
+    }
+
+    .marca span {
+        font-size: 8px;
+
+        letter-spacing: 1.8px;
+    }
+
+    .status-radio {
+        padding: 6px 9px;
+
+        font-size: 8px;
+    }
+
+    .area-capa {
+        padding: 30px 18px 10px;
+    }
+
+    .visualizador {
+        width: min(84vw, 350px);
+    }
+
+    .logo-cliente {
+        width: 55%;
+        height: 55%;
+
+        padding: 14px;
+    }
+
+    .onda {
+        width: 61%;
+        height: 61%;
+    }
+
+    .nucleo {
+        width: 63%;
+        height: 63%;
+    }
+
+    .informacoes {
+        padding: 22px 18px 0;
+    }
+
+    #nomeClienteRadio {
+        font-size: 13px;
+    }
+
+    #nomeMusica {
+        font-size: 27px;
+    }
+
+    #artista {
+        font-size: 15px;
+    }
+
+    .progresso {
+        margin: 24px 18px 0;
+    }
+
+    .tempo {
+        margin: 8px 18px 0;
+    }
+
+    .controles {
+        margin: 23px 18px 0;
+
+        gap: 9px;
+    }
+
+    .controles button {
+        width: 45px;
+        height: 45px;
+
+        font-size: 16px;
+    }
+
+    .controles .play {
+        width: 63px;
+        height: 63px;
+
+        font-size: 22px;
+    }
+
+    .volume {
+        margin: 18px;
+    }
+
+    .publicidade {
+        margin: 18px;
+
+        padding: 18px;
+    }
+
+    .publicidade h2 {
+        font-size: 15px;
+    }
+
+    .publicidade-icone {
+        font-size: 34px;
+    }
+
+    .playlist-container {
+        margin: 18px;
+
+        padding: 18px;
+    }
+
+    .playlist-titulo h2 {
+        font-size: 18px;
+    }
+
+    #botaoSairRadio {
+        margin-top: 18px;
+        margin-bottom: 5px;
+    }
+
+    /* =====================================================
+       ADMIN MOBILE
+       ===================================================== */
+
+    .admin {
+        width: 100%;
+
+        margin: 0;
+
+        padding: 18px 14px 35px;
+    }
 
     .admin-header {
-        padding: 20px 15px;
-
-        border-radius: 16px;
+        padding: 12px 12px 22px;
     }
 
+    .logo-admin {
+        width: 68px !important;
+        height: 68px !important;
+
+        max-width: 68px !important;
+        max-height: 68px !important;
+    }
 
     .admin-header h1 {
         font-size: 23px;
     }
 
-
-    .admin-card {
-        padding: 20px 17px;
-
-        border-radius: 16px;
+    .admin-header p {
+        font-size: 10px;
     }
 
+    .admin-card {
+        padding: 21px 17px;
+
+        border-radius: 15px;
+    }
 
     .admin-card h2 {
         font-size: 19px;
     }
 
+    .dashboard-indicadores {
+        grid-template-columns: 1fr;
 
-    .admin-musica {
-        align-items: flex-start;
+        gap: 10px;
     }
 
-
-    .admin-musica > div {
-        flex-shrink: 0;
+    .indicador-card {
+        padding: 16px;
     }
 
+    .modal-distribuicao {
+        padding: 12px;
+    }
 
     .modal-conteudo {
-        padding: 22px;
-
-        border-radius: 17px;
-    }
-
-}
-/* =====================================================
-   DASHBOARD ADMINISTRATIVO PROFISSIONAL
-===================================================== */
-
-.admin {
-    width: 100%;
-    max-width: 1200px;
-
-    min-height: 100vh;
-
-    margin: 0 auto;
-
-    padding: 35px;
-
-    background: #f4f7fb;
-}
-
-
-/* =====================================================
-   CABEÇALHO DO PAINEL
-===================================================== */
-
-.admin-header {
-    text-align: center;
-
-    margin-bottom: 35px;
-}
-
-.logo-admin {
-    width: 75px;
-    height: auto;
-
-    margin-bottom: 10px;
-}
-
-.admin-header h1 {
-    margin: 5px 0;
-
-    font-size: 30px;
-
-    color: #123;
-
-    letter-spacing: 0.5px;
-}
-
-.admin-header p {
-    margin: 0;
-
-    font-size: 15px;
-
-    color: #1769aa;
-
-    font-weight: bold;
-}
-
-
-/* =====================================================
-   CARDS
-===================================================== */
-
-.admin-card {
-    background: white;
-
-    padding: 25px;
-
-    margin-bottom: 25px;
-
-    border-radius: 18px;
-
-    border: 1px solid #e5ebf2;
-
-    box-shadow:
-        0 8px 25px rgba(0, 0, 0, 0.06);
-}
-
-.admin-card h2 {
-    margin-top: 0;
-
-    margin-bottom: 10px;
-
-    color: #1769aa;
-
-    font-size: 21px;
-}
-
-.admin-card > p {
-    color: #6b7280;
-
-    line-height: 1.5;
-}
-
-
-/* =====================================================
-   BIBLIOTECA / PUBLICIDADES
-===================================================== */
-
-.admin-musica {
-    display: flex;
-
-    align-items: center;
-
-    justify-content: space-between;
-
-    gap: 15px;
-
-    padding: 14px 16px;
-
-    margin-bottom: 9px;
-
-    background: #f7f9fc;
-
-    border: 1px solid #e8edf3;
-
-    border-radius: 12px;
-
-    transition:
-        transform 0.2s,
-        box-shadow 0.2s,
-        background 0.2s;
-}
-
-.admin-musica:hover {
-    background: white;
-
-    transform: translateY(-1px);
-
-    box-shadow:
-        0 5px 15px rgba(0, 0, 0, 0.06);
-}
-
-.admin-musica > span {
-    flex: 1;
-
-    min-width: 0;
-
-    line-height: 1.5;
-}
-
-.admin-musica small {
-    color: #777;
-}
-
-
-/* =====================================================
-   BOTÕES DOS ITENS
-===================================================== */
-
-.admin-musica > div {
-    display: flex;
-
-    align-items: center;
-
-    gap: 8px;
-
-    flex-shrink: 0;
-}
-
-.admin-musica button {
-    border: none;
-
-    min-width: 40px;
-    height: 40px;
-
-    padding: 0 10px;
-
-    border-radius: 10px;
-
-    background: #eaf3fb;
-
-    color: #1769aa;
-
-    cursor: pointer;
-
-    transition: 0.2s;
-}
-
-.admin-musica button:hover {
-    transform: translateY(-1px);
-
-    background: #dcecf9;
-}
-
-
-/* =====================================================
-   BOTÃO PRINCIPAL
-===================================================== */
-
-.botao-adicionar {
-    width: 100%;
-
-    padding: 14px;
-
-    margin-top: 15px;
-
-    border: none;
-
-    border-radius: 12px;
-
-    color: white;
-
-    background: #1769aa;
-
-    font-size: 15px;
-
-    font-weight: bold;
-
-    cursor: pointer;
-
-    transition: 0.2s;
-}
-
-.botao-adicionar:hover {
-    background: #12598f;
-
-    transform: translateY(-1px);
-}
-
-
-/* =====================================================
-   SELECT DA PROGRAMAÇÃO
-===================================================== */
-
-#clienteProgramacao {
-    width: 100%;
-
-    padding: 13px 15px;
-
-    margin-top: 10px;
-
-    border: 1px solid #d9e1ea;
-
-    border-radius: 10px;
-
-    background: white;
-
-    color: #333;
-
-    font-size: 15px;
-
-    outline: none;
-}
-
-#clienteProgramacao:focus {
-    border-color: #1769aa;
-
-    box-shadow:
-        0 0 0 3px rgba(23, 105, 170, 0.1);
-}
-
-
-/* =====================================================
-   LISTA DE PROGRAMAÇÃO
-===================================================== */
-
-#listaProgramacao {
-    margin-top: 20px;
-}
-
-
-/* =====================================================
-   BOTÃO EXCLUIR
-===================================================== */
-
-.botao-excluir,
-.botao-excluir-publicidade {
-    background: #f1f3f5 !important;
-
-    color: #555 !important;
-}
-
-.botao-excluir:hover,
-.botao-excluir-publicidade:hover {
-    background: #fde7e7 !important;
-
-    color: #c62828 !important;
-}
-
-
-/* =====================================================
-   MODAIS
-===================================================== */
-
-.modal-distribuicao {
-    position: fixed;
-
-    inset: 0;
-
-    display: flex;
-
-    align-items: center;
-
-    justify-content: center;
-
-    padding: 20px;
-
-    background: rgba(0, 0, 0, 0.55);
-
-    z-index: 9999;
-}
-
-.modal-conteudo {
-    width: 100%;
-
-    max-width: 500px;
-
-    max-height: 90vh;
-
-    overflow-y: auto;
-
-    padding: 28px;
-
-    background: white;
-
-    border-radius: 18px;
-
-    box-shadow:
-        0 20px 60px rgba(0, 0, 0, 0.25);
-}
-
-.modal-conteudo h2 {
-    margin-top: 0;
-
-    color: #1769aa;
-}
-
-.modal-conteudo label {
-    display: block;
-
-    padding: 12px;
-
-    margin-bottom: 8px;
-
-    border-radius: 10px;
-
-    background: #f5f8fb;
-
-    cursor: pointer;
-}
-
-.modal-conteudo label:hover {
-    background: #eaf3fb;
-}
-
-
-/* =====================================================
-   LOGIN ADMINISTRATIVO
-===================================================== */
-
-.login-form {
-    display: flex;
-
-    flex-direction: column;
-
-    gap: 8px;
-}
-
-.login-form label {
-    margin-top: 8px;
-
-    font-size: 14px;
-
-    font-weight: bold;
-
-    color: #374151;
-}
-
-.login-form input {
-    width: 100%;
-
-    padding: 13px 14px;
-
-    border: 1px solid #d9e1ea;
-
-    border-radius: 10px;
-
-    font-size: 15px;
-
-    outline: none;
-}
-
-.login-form input:focus {
-    border-color: #1769aa;
-
-    box-shadow:
-        0 0 0 3px rgba(23, 105, 170, 0.1);
-}
-
-
-/* =====================================================
-   SAIR / VOLTAR
-===================================================== */
-
-#botaoLogout {
-    margin-top: 10px;
-}
-
-.voltar {
-    display: block;
-
-    text-align: center;
-
-    margin-top: 20px;
-
-    color: #1769aa;
-
-    text-decoration: none;
-
-    font-weight: bold;
-}
-
-
-/* =====================================================
-   COMPUTADOR
-===================================================== */
-
-@media (min-width: 900px) {
-
-    #painelAdmin {
-        display: grid;
-
-        grid-template-columns:
-            repeat(2, minmax(0, 1fr));
-
-        gap: 25px;
-    }
-
-    #painelAdmin > .admin-header {
-        grid-column: 1 / -1;
-    }
-
-    #painelAdmin > .admin-card {
-        margin-bottom: 0;
-    }
-
-    #painelAdmin > #modalDistribuicao,
-    #painelAdmin > #modalDistribuicaoPublicidade {
-        grid-column: 1 / -1;
-    }
-
-    #botaoLogout,
-    #painelAdmin > .voltar,
-    #painelAdmin > br {
-        grid-column: 1 / -1;
-    }
-
-}
-
-
-/* =====================================================
-   CELULAR
-===================================================== */
-
-@media (max-width: 700px) {
-
-    .admin {
-        padding: 20px 14px;
-    }
-
-    .admin-header h1 {
-        font-size: 24px;
-    }
-
-    .admin-card {
-        padding: 18px;
+        padding: 21px 17px;
 
         border-radius: 15px;
     }
 
-    .admin-musica {
-        align-items: flex-start;
-
-        flex-direction: column;
+    .admin-card .botao-adicionar + .botao-adicionar,
+    .modal-conteudo .botao-adicionar + .botao-adicionar {
+        margin-left: 0;
+        margin-top: 8px;
     }
 
-    .admin-musica > div {
+    .modal-conteudo .botao-adicionar {
         width: 100%;
     }
 
-    .admin-musica button {
-        flex: 1;
+    #loginArea {
+        width: 100%;
+
+        margin: 0 auto;
+
+        padding: 22px 17px;
+
+        border-radius: 16px;
+    }
+}
+
+/* =========================================================
+   CELULARES PEQUENOS
+   ========================================================= */
+
+@media (max-width: 430px) {
+
+    .status-radio {
+        display: none;
     }
 
-}
-/* =====================================================
-   INDICADORES DO DASHBOARD
-===================================================== */
-
-.dashboard-indicadores {
-    grid-column: 1 / -1;
-
-    display: grid;
-
-    grid-template-columns:
-        repeat(3, minmax(0, 1fr));
-
-    gap: 18px;
-
-    margin-bottom: 25px;
-}
-
-
-.indicador-card {
-    display: flex;
-
-    align-items: center;
-
-    gap: 15px;
-
-    padding: 20px;
-
-    background: white;
-
-    border: 1px solid #e5ebf2;
-
-    border-radius: 16px;
-
-    box-shadow:
-        0 6px 20px rgba(0, 0, 0, 0.05);
-
-    transition: 0.2s;
-}
-
-
-.indicador-card:hover {
-    transform: translateY(-2px);
-
-    box-shadow:
-        0 10px 25px rgba(0, 0, 0, 0.08);
-}
-
-
-.indicador-icone {
-    width: 50px;
-    height: 50px;
-
-    display: flex;
-
-    align-items: center;
-    justify-content: center;
-
-    border-radius: 14px;
-
-    background: #eaf3fb;
-
-    font-size: 24px;
-}
-
-
-.indicador-card span {
-    display: block;
-
-    margin-bottom: 4px;
-
-    font-size: 13px;
-
-    color: #777;
-}
-
-
-.indicador-card strong {
-    display: block;
-
-    font-size: 26px;
-
-    color: #1769aa;
-}
-
-
-/* =====================================================
-   INDICADORES NO CELULAR
-===================================================== */
-
-@media (max-width: 700px) {
-
-    .dashboard-indicadores {
-        grid-template-columns: 1fr;
-
-        gap: 12px;
+    .cabecalho {
+        justify-content: center;
     }
 
-}
-/* =========================
-   CLIENTES E RÁDIOS
-========================= */
-
-.admin-cliente {
-    display: flex;
-
-    justify-content: space-between;
-    align-items: center;
-
-    gap: 15px;
-
-    padding: 16px;
-
-    margin-bottom: 10px;
-
-    border-radius: 12px;
-
-    background: #f2f6fa;
-
-    border: 1px solid #e2eaf2;
-
-    transition: 0.2s;
-}
-
-.admin-cliente:hover {
-    transform: translateY(-2px);
-
-    box-shadow:
-        0 5px 15px rgba(0, 0, 0, 0.08);
-}
-
-.cliente-info h3 {
-    margin: 0 0 5px;
-
-    font-size: 16px;
-
-    color: #123;
-}
-
-.cliente-status {
-    margin: 0;
-
-    font-size: 13px;
-}
-
-.cliente-estatisticas {
-    display: flex;
-
-    flex-direction: column;
-
-    align-items: flex-end;
-
-    gap: 5px;
-
-    font-size: 13px;
-
-    color: #1769aa;
-
-    white-space: nowrap;
-}
-
-
-/* =========================
-   MOBILE
-========================= */
-
-@media (max-width: 600px) {
-
-    .admin-cliente {
-        flex-direction: column;
-
-        align-items: flex-start;
+    .visualizador {
+        width: min(86vw, 330px);
     }
 
-    .cliente-estatisticas {
-        align-items: flex-start;
-
-        flex-direction: row;
-
-        flex-wrap: wrap;
+    #nomeMusica {
+        font-size: 24px;
     }
 
-}
-
-/* =========================
-   PAINEL DO CLIENTE
-========================= */
-
-.cliente-painel-info {
-    display: grid;
-
-    grid-template-columns:
-        repeat(2, 1fr);
-
-    gap: 10px;
-
-    margin-top: 20px;
-}
-
-.cliente-painel-info div {
-    padding: 15px;
-
-    text-align: center;
-
-    border-radius: 12px;
-
-    background: #f2f6fa;
-
-    color: #1769aa;
-
-    font-size: 14px;
-}
-
-.cliente-painel-info strong {
-    display: block;
-
-    margin: 5px 0;
-
-    font-size: 24px;
-
-    color: #123;
-}
-
-@media (max-width: 600px) {
-
-    .cliente-painel-info {
-        grid-template-columns: 1fr;
+    .playlist-status {
+        display: none;
     }
 
+    #loginRadio {
+        min-height: 100vh;
+
+        padding: 25px 16px;
+
+        border-radius: 0;
+    }
+
+    #loginRadio .logo {
+        width: 72px;
+        height: 72px;
+    }
+
+    #loginRadio .marca strong {
+        font-size: 20px;
+    }
+
+    #loginRadio .admin-card {
+        padding: 21px 17px;
+    }
+
+    #loginRadio .login-titulo h2 {
+        font-size: 20px;
+    }
+}
+
+/* =========================================================
+   REDUÇÃO DE MOVIMENTO
+   ========================================================= */
+
+@media (prefers-reduced-motion: reduce) {
+
+    *,
+    *::before,
+    *::after {
+        scroll-behavior: auto !important;
+
+        animation-duration: .01ms !important;
+        animation-iteration-count: 1 !important;
+
+        transition-duration: .01ms !important;
+    }
 }

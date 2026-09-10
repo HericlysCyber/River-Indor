@@ -2,51 +2,77 @@
 <html lang="pt-BR">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>River Tech - Rádio Indoor</title>
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+        content="width=device-width, initial-scale=1.0">
+
+    <title>River Indoor</title>
 
     <link rel="stylesheet" href="style.css">
+
 </head>
 
 <body>
 
-  <!-- ============================================
+
+<!-- =====================================================
      LOGIN DO CLIENTE
-============================================= -->
+===================================================== -->
 
 <main
     id="loginRadio"
     class="radio">
 
+
     <header class="cabecalho">
 
         <img
             src="img/logo.png"
-            alt="River Tech"
+            alt="River Indoor"
             class="logo">
 
-        <span>
-            RÁDIO INDOOR
-        </span>
+        <div class="marca">
+
+            <strong>
+                RIVER INDOOR
+            </strong>
+
+            <span>
+                RÁDIO PERSONALIZADA
+            </span>
+
+        </div>
 
     </header>
 
 
     <section class="admin-card">
 
-        <h2>
-            📻 Acesse sua Rádio
-        </h2>
+        <div class="login-titulo">
 
-        <p>
-            Digite seu e-mail e senha para acessar
-            sua rádio.
-        </p>
+            <span class="login-icone">
+                ●
+            </span>
+
+            <div>
+
+                <h2>
+                    Acesse sua Rádio
+                </h2>
+
+                <p>
+                    Entre para ouvir sua programação.
+                </p>
+
+            </div>
+
+        </div>
 
 
         <div class="login-form">
+
 
             <label for="emailRadio">
                 E-mail
@@ -74,7 +100,7 @@
                 id="botaoLoginRadio"
                 class="botao-adicionar">
 
-                🎵 Entrar na Rádio
+                Entrar na Rádio
 
             </button>
 
@@ -84,6 +110,7 @@
                 class="mensagem-login">
             </p>
 
+
         </div>
 
     </section>
@@ -92,9 +119,9 @@
 
 
 
-<!-- ============================================
-     RÁDIO
-============================================= -->
+<!-- =====================================================
+     RÁDIO DO CLIENTE
+===================================================== -->
 
 <main
     id="radioCliente"
@@ -102,46 +129,134 @@
     style="display: none;">
 
 
+    <!-- =================================================
+         CABEÇALHO
+    ================================================== -->
+
     <header class="cabecalho">
+
 
         <img
             src="img/logo.png"
-            alt="River Tech"
+            alt="River Indoor"
             class="logo">
 
-        <span>
-            RÁDIO INDOOR
-        </span>
+
+        <div class="marca">
+
+            <strong>
+                RIVER INDOOR
+            </strong>
+
+            <span>
+                RÁDIO PERSONALIZADA
+            </span>
+
+        </div>
+
+
+        <div class="status-radio">
+
+            <span class="status-ponto"></span>
+
+            AO VIVO
+
+        </div>
+
 
     </header>
 
 
-    <section class="capa">
 
-        <img
-            src="img/capa.webp"
-            alt="Capa da música"
-            id="capaMusica">
+    <!-- =================================================
+         ÁREA DA CAPA / VISUALIZADOR
+    ================================================== -->
+
+    <section class="area-capa">
+
+
+        <div class="visualizador">
+
+
+            <!-- Logo do cliente -->
+
+            <div class="logo-cliente">
+
+                <img
+                    src="img/capa.webp"
+                    alt="Logo do cliente"
+                    id="capaMusica">
+
+            </div>
+
+
+            <!-- Círculos animados -->
+
+            <div
+                class="ondas"
+                id="visualizadorAudio">
+
+
+                <span class="onda onda-1"></span>
+
+                <span class="onda onda-2"></span>
+
+                <span class="onda onda-3"></span>
+
+                <span class="onda onda-4"></span>
+
+
+                <div class="nucleo"></div>
+
+
+            </div>
+
+
+        </div>
+
 
     </section>
 
 
+
+    <!-- =================================================
+         INFORMAÇÕES
+    ================================================== -->
+
     <section class="informacoes">
 
-    <h2 id="nomeClienteRadio">
-        Rádio Indoor
-    </h2>
 
-    <h1 id="nomeMusica">
-        Minha música
-    </h1>
+        <div class="tocando">
 
-    <p id="artista">
-        River Tech
-    </p>
+            <span class="tocando-ponto"></span>
 
-</section>
+            TOCANDO AGORA
 
+        </div>
+
+
+        <h2 id="nomeClienteRadio">
+            Rádio Indoor
+        </h2>
+
+
+        <h1 id="nomeMusica">
+            Minha música
+        </h1>
+
+
+        <p id="artista">
+            River Tech
+        </p>
+
+
+    </section>
+
+
+
+    <!-- =================================================
+         PROGRESSO
+    ================================================== -->
 
     <div
         class="progresso"
@@ -168,34 +283,64 @@
     </div>
 
 
+
+    <!-- =================================================
+         CONTROLES
+    ================================================== -->
+
     <div class="controles">
 
-    <button id="anterior">
-        ⏮
-    </button>
 
-    <button
-        class="play"
-        id="play">
+        <button
+            id="anterior"
+            aria-label="Música anterior">
 
-        ▶️
+            ⏮
 
-    </button>
+        </button>
 
-    <button id="proxima">
-        ⏭
-    </button>
 
-    <button id="aleatorio">
-        🔀
-    </button>
+        <button
+            class="play"
+            id="play"
+            aria-label="Reproduzir">
 
-</div>
+            ▶
 
+        </button>
+
+
+        <button
+            id="proxima"
+            aria-label="Próxima música">
+
+            ⏭
+
+        </button>
+
+
+        <button
+            id="aleatorio"
+            aria-label="Modo aleatório">
+
+            🔀
+
+        </button>
+
+
+    </div>
+
+
+
+    <!-- =================================================
+         VOLUME
+    ================================================== -->
 
     <div class="volume">
 
-        🔊
+        <span>
+            🔊
+        </span>
 
         <input
             type="range"
@@ -206,44 +351,111 @@
     </div>
 
 
+
+    <!-- =================================================
+         ÁUDIO
+    ================================================== -->
+
     <audio id="audio">
     </audio>
 
 
+
+    <!-- =================================================
+         PUBLICIDADE
+    ================================================== -->
+
     <section class="publicidade">
 
-    <span>
-        📢 PUBLICIDADE
-    </span>
 
-    <h2 id="nomePublicidadeRadio">
-        Seu anúncio pode aparecer aqui
-    </h2>
+        <div class="publicidade-conteudo">
 
-    <p id="statusPublicidadeRadio">
-        Aguardando publicidade
-    </p>
 
-</section>
+            <span class="publicidade-label">
 
+                PUBLICIDADE
+
+            </span>
+
+
+            <h2 id="nomePublicidadeRadio">
+
+                Seu anúncio pode aparecer aqui
+
+            </h2>
+
+
+            <p id="statusPublicidadeRadio">
+
+                Aguardando publicidade
+
+            </p>
+
+
+        </div>
+
+
+        <div class="publicidade-icone">
+
+            📢
+
+        </div>
+
+
+    </section>
+
+
+
+    <!-- =================================================
+         PLAYLIST
+    ================================================== -->
 
     <section class="playlist-container">
 
-        <h2>
-            🎵 Playlist
-        </h2>
+
+        <div class="playlist-titulo">
+
+
+            <div>
+
+                <span>
+                    SUA RÁDIO
+                </span>
+
+                <h2>
+                    Playlist
+                </h2>
+
+            </div>
+
+
+            <div class="playlist-status">
+
+                ● ONLINE
+
+            </div>
+
+
+        </div>
+
 
         <div id="listaMusicas">
         </div>
 
+
     </section>
 
+
+
+    <!-- =================================================
+         SAIR
+    ================================================== -->
 
     <button
         id="botaoSairRadio"
         class="botao-adicionar">
 
-        🚪 Sair da Rádio
+        Sair da Rádio
 
     </button>
 
@@ -252,17 +464,19 @@
 
 
 
-<!-- ============================================
+<!-- =====================================================
      SUPABASE
-============================================= -->
+===================================================== -->
 
 <script
     src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2">
 </script>
 
+
 <script src="supabase.js"></script>
 
 <script src="script.js"></script>
+
 
 </body>
 

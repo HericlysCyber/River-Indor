@@ -3730,7 +3730,7 @@ async function carregarClientesAdmin() {
         } = await supabaseClient
             .from("clientes")
             .select(
-                "id, nome, ativo"
+                "id, nome, ativo, user_id"
             )
             .order(
                 "id",
@@ -3908,13 +3908,14 @@ async function carregarClientesAdmin() {
 
 
     <button
-        class="botao-gerenciar-cliente"
-        data-id="${cliente.id}"
-        data-nome="${cliente.nome}">
+    class="botao-gerenciar-cliente"
+    data-id="${cliente.id}"
+    data-nome="${cliente.nome}"
+    data-user-id="${cliente.user_id}">
+    
+    ⚙️ Gerenciar
 
-        ⚙️ Gerenciar
-
-    </button>
+</button>
 
 `;
 
@@ -4001,6 +4002,9 @@ if (listaClientesAdmin) {
 
             const clienteNome =
                 botao.dataset.nome;
+
+            const userId =
+                botao.dataset.userId;
 
             console.log(
                 "GERENCIANDO CLIENTE:",
@@ -4216,6 +4220,60 @@ if (listaClientesAdmin) {
 
                     <hr>
 
+<div class="acesso-cliente">
+
+    <h4>
+        🔐 Acesso do cliente
+    </h4>
+
+    <p>
+        E-mail utilizado para entrar na Rádio Indoor:
+    </p>
+
+    <input
+        type="email"
+        id="emailClienteGerenciamento"
+        placeholder="E-mail do cliente"
+        readonly
+    >
+
+    <p>
+        Para alterar a senha, informe uma nova senha:
+    </p>
+
+    <div class="campo-senha-cliente">
+
+        <input
+            type="password"
+            id="novaSenhaCliente"
+            placeholder="Digite a nova senha"
+            autocomplete="new-password"
+        >
+
+        <button
+            type="button"
+            id="botaoMostrarSenhaCliente">
+            👁️
+        </button>
+
+    </div>
+
+    <button
+        type="button"
+        id="botaoAlterarSenhaCliente"
+        class="botao-adicionar">
+
+        🔑 Alterar senha
+
+    </button>
+
+    <p
+        id="statusAcessoCliente">
+    </p>
+
+</div>
+                    <hr>
+
                     <div class="configuracao-publicidade">
 
                         <h4>
@@ -4263,6 +4321,471 @@ if (listaClientesAdmin) {
 
                 `;
 
+                // ====================================
+// BUSCAR E-MAIL / ACESSO DO CLIENTE
+// ====================================
+
+const campoEmailCliente =
+    document.getElementById(
+        "emailClienteGerenciamento"
+    );
+
+const statusAcessoCliente =
+    document.getElementById(
+        "statusAcessoCliente"
+    );
+
+
+if (campoEmailCliente && userId) {
+
+    console.log(
+        "BUSCANDO ACESSO DO CLIENTE:",
+        clienteId,
+        userId
+    );
+
+
+    try {
+
+        // ====================================
+        // PEGAR SESSÃO DO ADMIN
+        // ====================================
+
+        const {
+            data: {
+                session
+            }
+        } =
+            await supabaseClient.auth.getSession();
+
+
+        if (!session) {
+
+            throw new Error(
+                "Sessão do administrador não encontrada."
+            );
+
+        }
+
+
+        // ====================================
+        // CHAMAR EDGE FUNCTION
+        // ====================================
+
+        const resposta =
+            await fetch(
+                `${SUPABASE_URL}/functions/v1/smart-service`,
+                {
+                    method: "POST",
+
+                    headers: {
+
+                        "Content-Type":
+                            "application/json",
+
+                        "Authorization":
+                            `Bearer ${session.access_token}`
+
+                    },
+
+                    body:
+                        JSON.stringify({
+
+                            acao:
+                                "buscar_acesso",
+
+                            user_id:
+                                userId
+
+                        })
+
+                }
+            );
+
+
+        const resultado =
+            await resposta.json();
+
+
+        // ====================================
+        // VERIFICAR ERRO
+        // ====================================
+
+        if (!resposta.ok) {
+
+            console.error(
+                "ERRO AO BUSCAR ACESSO:",
+                resultado
+            );
+
+            throw new Error(
+                resultado.erro ||
+                "Não foi possível buscar o acesso do cliente."
+            );
+
+        }
+
+
+        // ====================================
+        // MOSTRAR E-MAIL
+        // ====================================
+
+        campoEmailCliente.value =
+            resultado.email || "";
+
+
+        console.log(
+            "E-MAIL DO CLIENTE:",
+            resultado.email
+        );
+
+
+        if (statusAcessoCliente) {
+
+            statusAcessoCliente.textContent =
+                "✅ Dados de acesso carregados.";
+
+        }
+
+
+    } catch (erro) {
+
+        console.error(
+            "ERRO AO BUSCAR E-MAIL DO CLIENTE:",
+            erro
+        );
+
+
+        campoEmailCliente.value =
+            "";
+
+
+        campoEmailCliente.placeholder =
+            "Não foi possível carregar o e-mail";
+
+
+        if (statusAcessoCliente) {
+
+            statusAcessoCliente.textContent =
+                "❌ Não foi possível carregar os dados de acesso.";
+
+        }
+
+    }
+
+}
+
+// ====================================
+// CONTROLE DE SENHA DO CLIENTE
+// ====================================
+
+const campoNovaSenhaCliente =
+    document.getElementById(
+        "novaSenhaCliente"
+    );
+
+const botaoMostrarSenhaCliente =
+    document.getElementById(
+        "botaoMostrarSenhaCliente"
+    );
+
+const botaoAlterarSenhaCliente =
+    document.getElementById(
+        "botaoAlterarSenhaCliente"
+    );
+
+
+// ====================================
+// MOSTRAR / OCULTAR SENHA
+// ====================================
+
+if (
+    campoNovaSenhaCliente &&
+    botaoMostrarSenhaCliente
+) {
+
+    botaoMostrarSenhaCliente.addEventListener(
+        "click",
+        function () {
+
+            if (
+                campoNovaSenhaCliente.type ===
+                "password"
+            ) {
+
+                campoNovaSenhaCliente.type =
+                    "text";
+
+                botaoMostrarSenhaCliente.textContent =
+                    "🙈";
+
+            } else {
+
+                campoNovaSenhaCliente.type =
+                    "password";
+
+                botaoMostrarSenhaCliente.textContent =
+                    "👁️";
+
+            }
+
+        }
+    );
+
+}
+
+
+// ====================================
+// ALTERAR SENHA
+// ====================================
+
+if (botaoAlterarSenhaCliente) {
+
+    botaoAlterarSenhaCliente.addEventListener(
+        "click",
+        async function () {
+
+            const novaSenha =
+                campoNovaSenhaCliente
+                    ? campoNovaSenhaCliente.value
+                    : "";
+
+
+            // ====================================
+            // VALIDAR
+            // ====================================
+
+            if (!novaSenha) {
+
+                alert(
+                    "Digite a nova senha do cliente."
+                );
+
+                if (campoNovaSenhaCliente) {
+                    campoNovaSenhaCliente.focus();
+                }
+
+                return;
+
+            }
+
+
+            if (novaSenha.length < 6) {
+
+                alert(
+                    "A nova senha deve ter pelo menos 6 caracteres."
+                );
+
+                if (campoNovaSenhaCliente) {
+                    campoNovaSenhaCliente.focus();
+                }
+
+                return;
+
+            }
+
+
+            // ====================================
+            // CONFIRMAR
+            // ====================================
+
+            const confirmar =
+                confirm(
+                    `Deseja realmente alterar a senha deste cliente?\n\n` +
+                    `A nova senha será necessária para o próximo acesso.`
+                );
+
+
+            if (!confirmar) {
+
+                return;
+
+            }
+
+
+            // ====================================
+            // DESABILITAR BOTÃO
+            // ====================================
+
+            botaoAlterarSenhaCliente.disabled =
+                true;
+
+            botaoAlterarSenhaCliente.textContent =
+                "⏳ Alterando...";
+
+
+            if (statusAcessoCliente) {
+
+                statusAcessoCliente.textContent =
+                    "🔄 Alterando senha...";
+
+            }
+
+
+            try {
+
+                // ====================================
+                // PEGAR SESSÃO DO ADMIN
+                // ====================================
+
+                const {
+                    data: {
+                        session
+                    }
+                } =
+                    await supabaseClient.auth.getSession();
+
+
+                if (!session) {
+
+                    throw new Error(
+                        "Sessão do administrador não encontrada."
+                    );
+
+                }
+
+
+                // ====================================
+                // CHAMAR EDGE FUNCTION
+                // ====================================
+
+                const resposta =
+                    await fetch(
+                        `${SUPABASE_URL}/functions/v1/smart-service`,
+                        {
+                            method: "POST",
+
+                            headers: {
+
+                                "Content-Type":
+                                    "application/json",
+
+                                "Authorization":
+                                    `Bearer ${session.access_token}`
+
+                            },
+
+                            body:
+                                JSON.stringify({
+
+                                    acao:
+                                        "alterar_senha",
+
+                                    user_id:
+                                        userId,
+
+                                    nova_senha:
+                                        novaSenha
+
+                                })
+
+                        }
+                    );
+
+
+                const resultado =
+                    await resposta.json();
+
+
+                // ====================================
+                // VERIFICAR ERRO
+                // ====================================
+
+                if (!resposta.ok) {
+
+                    console.error(
+                        "ERRO AO ALTERAR SENHA:",
+                        resultado
+                    );
+
+                    throw new Error(
+                        resultado.erro ||
+                        "Não foi possível alterar a senha."
+                    );
+
+                }
+
+
+                // ====================================
+                // SUCESSO
+                // ====================================
+
+                console.log(
+                    "SENHA ALTERADA COM SUCESSO:",
+                    resultado
+                );
+
+
+                alert(
+                    "Senha do cliente alterada com sucesso! ✅"
+                );
+
+
+                // ====================================
+                // LIMPAR CAMPO
+                // ====================================
+
+                if (campoNovaSenhaCliente) {
+
+                    campoNovaSenhaCliente.value = "";
+
+                    campoNovaSenhaCliente.type =
+                        "password";
+
+                }
+
+
+                if (botaoMostrarSenhaCliente) {
+
+                    botaoMostrarSenhaCliente.textContent =
+                        "👁️";
+
+                }
+
+
+                if (statusAcessoCliente) {
+
+                    statusAcessoCliente.textContent =
+                        "✅ Senha alterada com sucesso.";
+
+                }
+
+
+            } catch (erro) {
+
+                console.error(
+                    "ERRO AO ALTERAR SENHA DO CLIENTE:",
+                    erro
+                );
+
+
+                if (statusAcessoCliente) {
+
+                    statusAcessoCliente.textContent =
+                        "❌ Erro ao alterar senha.";
+
+                }
+
+
+                alert(
+                    erro.message ||
+                    "Não foi possível alterar a senha."
+                );
+
+            } finally {
+
+                botaoAlterarSenhaCliente.disabled =
+                    false;
+
+                botaoAlterarSenhaCliente.textContent =
+                    "🔑 Alterar senha";
+
+            }
+
+        }
+    );
+
+}
 
                 // ====================================
                 // PREENCHER CAMPO DO NOME

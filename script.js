@@ -2072,3 +2072,33 @@ console.log(
     "BOTÃO SAIR DA RÁDIO CONFIGURADO."
 );
 
+/* =====================================================
+   VISUALIZADOR DA RIVER INDOOR
+===================================================== */
+
+const visualizadorAudio =
+    document.getElementById("visualizadorAudio");
+
+if (audio && visualizadorAudio) {
+
+    audio.addEventListener("play", () => {
+
+        visualizadorAudio.classList.add("tocando");
+
+    });
+
+
+    audio.addEventListener("pause", () => {
+
+        visualizadorAudio.classList.remove("tocando");
+
+    });
+
+
+    audio.addEventListener("ended", () => {
+
+        visualizadorAudio.classList.remove("tocando");
+
+    });
+
+}
